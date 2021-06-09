@@ -3,6 +3,7 @@ package com.katyrin.loan_online
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.katyrin.loan_online.databinding.ActivityMainBinding
+import com.katyrin.loan_online.ui.login.LoginFragment
 
 class MainActivity : AppCompatActivity() {
 
