@@ -7,15 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
-import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.databinding.FragmentLoginBinding
+import com.katyrin.loan_online.ui.info.InfoViewPagerFragment
 import com.katyrin.loan_online.utils.afterTextChanged
-import com.katyrin.loan_online.viewmodel.login.*
+import com.katyrin.loan_online.viewmodel.login.LoginFormState
+import com.katyrin.loan_online.viewmodel.login.LoginResult
+import com.katyrin.loan_online.viewmodel.login.LoginViewModel
+import io.reactivex.BackpressureStrategy
+import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
 class LoginFragment : Fragment() {
@@ -24,6 +28,8 @@ class LoginFragment : Fragment() {
     lateinit var factory: ViewModelProvider.Factory
     private val loginViewModel: LoginViewModel by viewModels(factoryProducer = { factory })
     private var binding: FragmentLoginBinding? = null
+    private val _textInput = BehaviorSubject.create<Pair<String, String>>()
+    private val textInput = _textInput.toFlowable(BackpressureStrategy.LATEST)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -42,22 +48,21 @@ class LoginFragment : Fragment() {
         loginViewModel.loginFormState.observe(viewLifecycleOwner) { handleLoginState(it) }
         loginViewModel.loginResult.observe(viewLifecycleOwner) { handleLoginResult(it) }
 
+        loginViewModel.subscribeLoginDataChanged(textInput)
         initViews()
     }
 
     private fun initViews() {
         binding?.username?.afterTextChanged {
-            loginViewModel.loginDataChanged(
-                binding?.username?.text.toString(),
-                binding?.password?.text.toString()
+            _textInput.onNext(
+                binding?.username?.text.toString() to binding?.password?.text.toString()
             )
         }
 
         binding?.password?.apply {
             afterTextChanged {
-                loginViewModel.loginDataChanged(
-                    binding?.username?.text.toString(),
-                    binding?.password?.text.toString()
+                _textInput.onNext(
+                    binding?.username?.text.toString() to binding?.password?.text.toString()
                 )
             }
 
@@ -83,7 +88,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun handleLoginState(state: LoginFormState) {
-        when(state) {
+        when (state) {
             is LoginFormState.ErrorUserName -> {
                 binding?.username?.error = getString(R.string.invalid_username)
             }
@@ -98,30 +103,31 @@ class LoginFragment : Fragment() {
 
     private fun handleLoginResult(state: LoginResult) {
         binding?.loading?.isVisible = false
-        when(state) {
+        when (state) {
             is LoginResult.Success -> {
-                updateUiWithUser(state.loggedInUserView)
+                updateUiWithUser(state.string)
+                replaceInfoViewPagerFragment()
             }
             is LoginResult.Error -> {
-                showLoginFailed(R.string.login_failed)
+                showLoginFailed()
             }
         }
     }
 
-
-    private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome)
-        val displayName = model.displayName
-        // TODO : initiate successful logged in experience
-        Toast.makeText(
-            requireContext(),
-            "$welcome $displayName",
-            Toast.LENGTH_LONG
-        ).show()
+    private fun replaceInfoViewPagerFragment() {
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, InfoViewPagerFragment.newInstance("Roman"))
+            .commitNow()
     }
 
-    private fun showLoginFailed(@StringRes errorString: Int) {
-        Toast.makeText(requireContext(), errorString, Toast.LENGTH_SHORT).show()
+    private fun updateUiWithUser(text: String?) {
+        val welcome = getString(R.string.welcome)
+        Toast.makeText(requireContext(), "$welcome $text", Toast.LENGTH_LONG).show()
+    }
+
+    private fun showLoginFailed() {
+        Toast.makeText(requireContext(), R.string.login_failed, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDetach() {

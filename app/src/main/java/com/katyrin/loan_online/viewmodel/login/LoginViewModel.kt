@@ -5,9 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.katyrin.loan_online.data.model.User
 import com.katyrin.loan_online.data.repository.LoginRepository
+import com.katyrin.loan_online.utils.HALF_SECOND
+import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import okhttp3.ResponseBody
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -53,14 +57,25 @@ class LoginViewModel @Inject constructor(
 
     private fun setSuccessStateServer(responseBody: ResponseBody) {
         token = responseBody.string()
-        _loginResult.value = LoginResult.Success(LoggedInUserView(displayName = token))
+        _loginResult.value = LoginResult.Success(token)
     }
 
     private fun setErrorStateServer() {
         _loginResult.value = LoginResult.Error
     }
 
-    fun loginDataChanged(username: String, password: String) {
+    fun subscribeLoginDataChanged(textInput: Flowable<Pair<String, String>>) {
+        disposable?.add(
+            textInput
+                .debounce(HALF_SECOND, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.computation())
+                .distinctUntilChanged()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { pair -> loginDataChanged(pair.first, pair.second) }
+        )
+    }
+
+    private fun loginDataChanged(username: String, password: String) {
         if (!isFieldValid(username)) {
             _loginForm.value = LoginFormState.ErrorUserName
         } else if (!isFieldValid(password)) {
