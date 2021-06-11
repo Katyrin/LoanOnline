@@ -13,5 +13,5 @@ data class LoanDTO(
     val percent: Double?,
     val period: Int?,
     val phoneNumber: String?,
-    val state: String?
+    val state: LoanState?
 ) : Parcelable

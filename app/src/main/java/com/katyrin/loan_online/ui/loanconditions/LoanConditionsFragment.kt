@@ -15,7 +15,7 @@ import com.katyrin.loan_online.Prefs
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.data.model.LoanConditionsDTO
 import com.katyrin.loan_online.databinding.FragmentLoanConditionsBinding
-import com.katyrin.loan_online.ui.OnAppCompatActivity
+import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
 import com.katyrin.loan_online.ui.loanrequest.LoanRequestFragment
 import com.katyrin.loan_online.viewmodel.loanconditions.LoanConditionsState
 import com.katyrin.loan_online.viewmodel.loanconditions.LoanConditionsViewModel
@@ -111,6 +111,7 @@ class LoanConditionsFragment : Fragment() {
     }
 
     companion object {
+        const val TAG = "LoanConditionsFragment"
         fun newInstance() = LoanConditionsFragment()
     }
 }

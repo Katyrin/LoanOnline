@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.katyrin.loan_online.MainActivity
+import com.katyrin.loan_online.ui.activities.AuthorizedActivity
 import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.databinding.FragmentSuccessBinding
 
@@ -36,7 +36,7 @@ class SuccessFragment : Fragment() {
 
     private fun setButtonClick() {
         binding?.okButton?.setOnClickListener {
-            startActivity(Intent(requireContext(), MainActivity::class.java))
+            startActivity(Intent(requireContext(), AuthorizedActivity::class.java))
             requireActivity().finish()
         }
     }

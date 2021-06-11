@@ -1,22 +1,22 @@
-package com.katyrin.loan_online.ui.login
+package com.katyrin.loan_online.ui.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.katyrin.loan_online.App
 import com.katyrin.loan_online.R
-import com.katyrin.loan_online.databinding.ActivityLoginBinding
+import com.katyrin.loan_online.databinding.ActivityUnauthorizedBinding
 import com.katyrin.loan_online.di.AppComponent
-import com.katyrin.loan_online.ui.OnAppCompatActivity
+import com.katyrin.loan_online.ui.login.LoginFragment
 
-class LoginActivity : AppCompatActivity(), OnAppCompatActivity {
+class UnauthorizedActivity : AppCompatActivity(), OnAppCompatActivity {
 
-    private var binding: ActivityLoginBinding? = null
+    private var binding: ActivityUnauthorizedBinding? = null
     override var appComponent: AppComponent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent = (application as App).appComponent
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityUnauthorizedBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
         if (savedInstanceState == null) replaceLoginFragment()

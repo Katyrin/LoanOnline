@@ -15,7 +15,7 @@ import com.katyrin.loan_online.R
 import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.data.model.LoanRequest
 import com.katyrin.loan_online.databinding.FragmentLoanRequestBinding
-import com.katyrin.loan_online.ui.OnAppCompatActivity
+import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
 import com.katyrin.loan_online.ui.success.SuccessFragment
 import com.katyrin.loan_online.utils.afterTextChanged
 import com.katyrin.loan_online.viewmodel.loanrequest.ImportantDataState

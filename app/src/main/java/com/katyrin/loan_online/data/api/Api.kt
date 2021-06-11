@@ -31,4 +31,10 @@ interface Api {
     fun getLoansCondition(
         @Header("Authorization") token: String
     ): Single<LoanConditionsDTO>
+
+    @Headers(value = ["accept: */*"])
+    @GET("loans/all")
+    fun getLoans(
+        @Header("Authorization") token: String
+    ): Single<List<LoanDTO>>
 }

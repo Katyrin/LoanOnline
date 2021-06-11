@@ -4,12 +4,16 @@ import com.katyrin.loan_online.data.datasource.loanconditions.LoanConditionsData
 import com.katyrin.loan_online.data.datasource.loanconditions.LoanConditionsDataSourceImpl
 import com.katyrin.loan_online.data.datasource.loanrequest.LoanRequestDataSource
 import com.katyrin.loan_online.data.datasource.loanrequest.LoanRequestDataSourceImpl
+import com.katyrin.loan_online.data.datasource.loans.LoansDataSource
+import com.katyrin.loan_online.data.datasource.loans.LoansDataSourceImpl
 import com.katyrin.loan_online.data.datasource.login.LoginDataSource
 import com.katyrin.loan_online.data.datasource.login.LoginDataSourceImpl
 import com.katyrin.loan_online.data.repository.loanconditions.LoanConditionsRepository
 import com.katyrin.loan_online.data.repository.loanconditions.LoanConditionsRepositoryImpl
 import com.katyrin.loan_online.data.repository.loanrequest.LoanRequestRepository
 import com.katyrin.loan_online.data.repository.loanrequest.LoanRequestRepositoryImpl
+import com.katyrin.loan_online.data.repository.loans.LoansRepository
+import com.katyrin.loan_online.data.repository.loans.LoansRepositoryImpl
 import com.katyrin.loan_online.data.repository.login.LoginRepository
 import com.katyrin.loan_online.data.repository.login.LoginRepositoryImpl
 import dagger.Binds
@@ -50,4 +54,12 @@ interface DataModule {
     fun loanConditionsRepository(
         loanConditionsRepositoryImpl: LoanConditionsRepositoryImpl
     ): LoanConditionsRepository
+
+    @Binds
+    @Singleton
+    fun loansDataSource(loansDataSourceImpl: LoansDataSourceImpl): LoansDataSource
+
+    @Binds
+    @Singleton
+    fun loansRepository(loansRepositoryImpl: LoansRepositoryImpl): LoansRepository
 }

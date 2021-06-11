@@ -1,4 +1,4 @@
-package com.katyrin.loan_online.ui
+package com.katyrin.loan_online.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,6 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.katyrin.loan_online.databinding.ActivitySplashBinding
-import com.katyrin.loan_online.ui.login.LoginActivity
 import com.katyrin.loan_online.utils.setRotateImage
 
 class SplashActivity : AppCompatActivity() {
@@ -24,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
     private fun startAnimation() {
         binding?.imageView?.setRotateImage()
         handler.postDelayed({
-            startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+            startActivity(Intent(this@SplashActivity, UnauthorizedActivity::class.java))
             finish()
         }, 1000)
     }

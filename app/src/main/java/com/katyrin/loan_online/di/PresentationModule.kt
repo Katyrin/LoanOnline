@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.katyrin.loan_online.viewmodel.loanconditions.LoanConditionsViewModel
 import com.katyrin.loan_online.viewmodel.loanrequest.LoanRequestViewModel
+import com.katyrin.loan_online.viewmodel.loans.LoansViewModel
 import com.katyrin.loan_online.viewmodel.login.LoginViewModel
 import dagger.Binds
 import dagger.Module
@@ -29,4 +30,9 @@ interface PresentationModule {
     @IntoMap
     @ViewModelKey(LoanConditionsViewModel::class)
     fun loanConditionsViewModel(viewModel: LoanConditionsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(LoansViewModel::class)
+    fun loansViewModel(viewModel: LoansViewModel): ViewModel
 }

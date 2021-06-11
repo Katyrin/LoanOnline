@@ -15,7 +15,7 @@ import com.katyrin.loan_online.App
 import com.katyrin.loan_online.Prefs
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.databinding.FragmentLoginBinding
-import com.katyrin.loan_online.ui.OnAppCompatActivity
+import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
 import com.katyrin.loan_online.ui.info.InfoViewPagerFragment
 import com.katyrin.loan_online.utils.afterTextChanged
 import com.katyrin.loan_online.viewmodel.login.LoginFormState
