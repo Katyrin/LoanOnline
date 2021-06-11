@@ -1,4 +1,4 @@
-package com.katyrin.loan_online.data.datasource
+package com.katyrin.loan_online.data.datasource.login
 
 import com.katyrin.loan_online.data.api.Api
 import com.katyrin.loan_online.data.model.User

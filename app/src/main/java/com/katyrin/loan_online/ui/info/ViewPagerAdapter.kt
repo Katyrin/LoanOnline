@@ -9,7 +9,8 @@ import com.katyrin.loan_online.utils.ONE_ITEM
 
 class ViewPagerAdapter(
     private val texts: List<String>,
-    private var images: List<Int>
+    private val images: List<Int>,
+    private val onClick: () -> Unit
 ) : RecyclerView.Adapter<ViewPagerAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val itemBinding: FragmentInfoBinding) :
@@ -18,6 +19,9 @@ class ViewPagerAdapter(
             itemBinding.infoText.text = texts[position]
             itemBinding.infoImage.setImageResource(images[position])
             itemBinding.tryButton.isVisible = ((itemCount - ONE_ITEM) == position)
+            itemBinding.tryButton.setOnClickListener {
+                onClick()
+            }
         }
     }
 

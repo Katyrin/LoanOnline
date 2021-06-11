@@ -1,6 +1,6 @@
-package com.katyrin.loan_online.data.repository
+package com.katyrin.loan_online.data.repository.login
 
-import com.katyrin.loan_online.data.datasource.LoginDataSource
+import com.katyrin.loan_online.data.datasource.login.LoginDataSource
 import com.katyrin.loan_online.data.model.User
 import com.katyrin.loan_online.data.model.UserRegistrationDTO
 import io.reactivex.Single

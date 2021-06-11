@@ -11,8 +11,11 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.katyrin.loan_online.App
+import com.katyrin.loan_online.Prefs
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.databinding.FragmentLoginBinding
+import com.katyrin.loan_online.ui.OnAppCompatActivity
 import com.katyrin.loan_online.ui.info.InfoViewPagerFragment
 import com.katyrin.loan_online.utils.afterTextChanged
 import com.katyrin.loan_online.viewmodel.login.LoginFormState
@@ -28,12 +31,13 @@ class LoginFragment : Fragment() {
     lateinit var factory: ViewModelProvider.Factory
     private val loginViewModel: LoginViewModel by viewModels(factoryProducer = { factory })
     private var binding: FragmentLoginBinding? = null
+    private val prefs: Prefs by lazy { App.prefs!! }
     private val _textInput = BehaviorSubject.create<Pair<String, String>>()
     private val textInput = _textInput.toFlowable(BackpressureStrategy.LATEST)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as LoginActivity).appComponent?.inject(this)
+        (activity as OnAppCompatActivity).appComponent?.inject(this)
     }
 
     override fun onCreateView(
@@ -53,37 +57,31 @@ class LoginFragment : Fragment() {
     }
 
     private fun initViews() {
-        binding?.username?.afterTextChanged {
-            _textInput.onNext(
-                binding?.username?.text.toString() to binding?.password?.text.toString()
-            )
-        }
+        binding?.username?.afterTextChanged { onNextTextInput() }
+        binding?.login?.setOnClickListener { startRegistration() }
 
         binding?.password?.apply {
-            afterTextChanged {
-                _textInput.onNext(
-                    binding?.username?.text.toString() to binding?.password?.text.toString()
-                )
-            }
+            afterTextChanged { onNextTextInput() }
 
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
-                    EditorInfo.IME_ACTION_DONE ->
-                        loginViewModel.registration(
-                            binding?.username?.text.toString(),
-                            binding?.password?.text.toString()
-                        )
+                    EditorInfo.IME_ACTION_DONE -> startRegistration()
                 }
                 false
             }
+        }
+    }
 
-            binding?.login?.setOnClickListener {
-                binding?.loading?.isVisible = true
-                loginViewModel.registration(
-                    binding?.username?.text.toString(),
-                    binding?.password?.text.toString()
-                )
-            }
+    private fun onNextTextInput() {
+        _textInput.onNext(binding?.username?.text.toString() to binding?.password?.text.toString())
+    }
+
+    private fun startRegistration() {
+        if (binding?.login?.isEnabled == true) {
+            loginViewModel.registration(
+                binding?.username?.text.toString(),
+                binding?.password?.text.toString()
+            )
         }
     }
 
@@ -105,13 +103,20 @@ class LoginFragment : Fragment() {
         binding?.loading?.isVisible = false
         when (state) {
             is LoginResult.Success -> {
-                updateUiWithUser(state.string)
+                updateUiWithUser(state.user?.name)
+                saveData(state.token, state.user?.name, state.user?.password)
                 replaceInfoViewPagerFragment()
             }
             is LoginResult.Error -> {
                 showLoginFailed()
             }
         }
+    }
+
+    private fun saveData(token: String?, name: String?, password: String?) {
+        prefs.token = token
+        prefs.userName = name
+        prefs.password = password
     }
 
     private fun replaceInfoViewPagerFragment() {

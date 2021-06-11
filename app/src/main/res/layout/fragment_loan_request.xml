@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/loan_request_screen_edge_padding"
+    android:paddingEnd="@dimen/loan_request_screen_edge_padding"
+    tools:context=".ui.loanrequest.LoanRequestFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/header_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fragment_vertical_margin"
+            android:layout_marginBottom="@dimen/fragment_vertical_margin"
+            android:text="@string/fill_out_the_application"
+            app:layout_constraintBottom_toTopOf="@id/max_amount_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/max_amount_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/max_amount"
+            app:layout_constraintBottom_toTopOf="@id/percent_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_text_view" />
+
+        <TextView
+            android:id="@+id/percent_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_percent_layout"
+            app:layout_constraintBottom_toTopOf="@id/period_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/max_amount_text_view" />
+
+        <TextView
+            android:id="@+id/period_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_period_layout"
+            app:layout_constraintBottom_toTopOf="@id/first_name_edit_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/percent_text_view" />
+
+        <EditText
+            android:id="@+id/first_name_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fragment_vertical_margin"
+            android:layout_marginBottom="@dimen/fragment_vertical_margin"
+            android:hint="@string/enter_first_name"
+            android:inputType="textPersonName"
+            android:selectAllOnFocus="true"
+            app:layout_constraintBottom_toTopOf="@id/last_name_edit_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/period_text_view" />
+
+        <EditText
+            android:id="@+id/last_name_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fragment_vertical_margin"
+            android:layout_marginBottom="@dimen/fragment_vertical_margin"
+            android:hint="@string/enter_last_name"
+            android:inputType="textPersonName"
+            android:selectAllOnFocus="true"
+            app:layout_constraintBottom_toTopOf="@id/phone_number_edit_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/first_name_edit_text" />
+
+        <EditText
+            android:id="@+id/phone_number_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fragment_vertical_margin"
+            android:layout_marginBottom="@dimen/fragment_vertical_margin"
+            android:hint="@string/enter_phone_number"
+            android:imeActionLabel="@string/send_request"
+            android:imeOptions="actionDone"
+            android:inputType="phone"
+            android:selectAllOnFocus="true"
+            app:layout_constraintBottom_toTopOf="@id/send_request_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/last_name_edit_text" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/send_request_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fragment_vertical_margin"
+            android:layout_marginBottom="@dimen/fragment_vertical_margin"
+            android:enabled="false"
+            android:text="@string/send_request"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phone_number_edit_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

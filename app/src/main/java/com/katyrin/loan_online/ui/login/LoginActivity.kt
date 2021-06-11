@@ -6,11 +6,12 @@ import com.katyrin.loan_online.App
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.databinding.ActivityLoginBinding
 import com.katyrin.loan_online.di.AppComponent
+import com.katyrin.loan_online.ui.OnAppCompatActivity
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), OnAppCompatActivity {
 
     private var binding: ActivityLoginBinding? = null
-    var appComponent: AppComponent? = null
+    override var appComponent: AppComponent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent = (application as App).appComponent

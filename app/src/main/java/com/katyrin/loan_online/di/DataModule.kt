@@ -1,9 +1,17 @@
 package com.katyrin.loan_online.di
 
-import com.katyrin.loan_online.data.datasource.LoginDataSource
-import com.katyrin.loan_online.data.datasource.LoginDataSourceImpl
-import com.katyrin.loan_online.data.repository.LoginRepository
-import com.katyrin.loan_online.data.repository.LoginRepositoryImpl
+import com.katyrin.loan_online.data.datasource.loanconditions.LoanConditionsDataSource
+import com.katyrin.loan_online.data.datasource.loanconditions.LoanConditionsDataSourceImpl
+import com.katyrin.loan_online.data.datasource.loanrequest.LoanRequestDataSource
+import com.katyrin.loan_online.data.datasource.loanrequest.LoanRequestDataSourceImpl
+import com.katyrin.loan_online.data.datasource.login.LoginDataSource
+import com.katyrin.loan_online.data.datasource.login.LoginDataSourceImpl
+import com.katyrin.loan_online.data.repository.loanconditions.LoanConditionsRepository
+import com.katyrin.loan_online.data.repository.loanconditions.LoanConditionsRepositoryImpl
+import com.katyrin.loan_online.data.repository.loanrequest.LoanRequestRepository
+import com.katyrin.loan_online.data.repository.loanrequest.LoanRequestRepositoryImpl
+import com.katyrin.loan_online.data.repository.login.LoginRepository
+import com.katyrin.loan_online.data.repository.login.LoginRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -18,4 +26,28 @@ interface DataModule {
     @Binds
     @Singleton
     fun loginRepository(loginRepositoryImpl: LoginRepositoryImpl): LoginRepository
+
+    @Binds
+    @Singleton
+    fun loanRequestDataSource(
+        loanRequestDataSourceImpl: LoanRequestDataSourceImpl
+    ): LoanRequestDataSource
+
+    @Binds
+    @Singleton
+    fun loanRequestRepository(
+        loanRequestRepositoryImpl: LoanRequestRepositoryImpl
+    ): LoanRequestRepository
+
+    @Binds
+    @Singleton
+    fun loanConditionsDataSource(
+        loanConditionsDataSourceImpl: LoanConditionsDataSourceImpl
+    ): LoanConditionsDataSource
+
+    @Binds
+    @Singleton
+    fun loanConditionsRepository(
+        loanConditionsRepositoryImpl: LoanConditionsRepositoryImpl
+    ): LoanConditionsRepository
 }

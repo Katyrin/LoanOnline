@@ -1,12 +1,9 @@
 package com.katyrin.loan_online.data.api
 
-import com.katyrin.loan_online.data.model.User
-import com.katyrin.loan_online.data.model.UserRegistrationDTO
+import com.katyrin.loan_online.data.model.*
 import io.reactivex.Single
 import okhttp3.ResponseBody
-import retrofit2.http.Body
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface Api {
 
@@ -21,4 +18,17 @@ interface Api {
     fun postLogin(
         @Body body: User
     ): Single<ResponseBody>
+
+    @Headers(value = ["accept: */*", "Content-Type: application/json"])
+    @POST("loans")
+    fun postLoansRequest(
+        @Header("Authorization") token: String,
+        @Body body: LoanRequest
+    ): Single<LoanDTO>
+
+    @Headers(value = ["accept: */*"])
+    @GET("loans/conditions")
+    fun getLoansCondition(
+        @Header("Authorization") token: String
+    ): Single<LoanConditionsDTO>
 }

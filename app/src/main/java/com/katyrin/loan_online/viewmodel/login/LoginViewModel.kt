@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.katyrin.loan_online.data.model.User
-import com.katyrin.loan_online.data.repository.LoginRepository
+import com.katyrin.loan_online.data.repository.login.LoginRepository
 import com.katyrin.loan_online.utils.HALF_SECOND
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -57,7 +57,7 @@ class LoginViewModel @Inject constructor(
 
     private fun setSuccessStateServer(responseBody: ResponseBody) {
         token = responseBody.string()
-        _loginResult.value = LoginResult.Success(token)
+        _loginResult.value = LoginResult.Success(token, user)
     }
 
     private fun setErrorStateServer() {
