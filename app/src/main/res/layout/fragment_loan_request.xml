@@ -19,20 +19,10 @@
             android:layout_marginTop="@dimen/fragment_vertical_margin"
             android:layout_marginBottom="@dimen/fragment_vertical_margin"
             android:text="@string/fill_out_the_application"
-            app:layout_constraintBottom_toTopOf="@id/max_amount_text_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/max_amount_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/max_amount"
             app:layout_constraintBottom_toTopOf="@id/percent_text_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/header_text_view" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/percent_text_view"
@@ -42,17 +32,37 @@
             app:layout_constraintBottom_toTopOf="@id/period_text_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/max_amount_text_view" />
+            app:layout_constraintTop_toBottomOf="@id/header_text_view" />
 
         <TextView
             android:id="@+id/period_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_period_layout"
-            app:layout_constraintBottom_toTopOf="@id/first_name_edit_text"
+            app:layout_constraintBottom_toTopOf="@id/max_amount_text_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/percent_text_view" />
+
+        <TextView
+            android:id="@+id/max_amount_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_amount_layout"
+            app:layout_constraintBottom_toTopOf="@id/max_amount_seek_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/period_text_view" />
+
+        <SeekBar
+            android:id="@+id/max_amount_seek_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progress="0"
+            app:layout_constraintBottom_toTopOf="@id/first_name_edit_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/max_amount_text_view" />
 
         <EditText
             android:id="@+id/first_name_edit_text"
@@ -66,7 +76,7 @@
             app:layout_constraintBottom_toTopOf="@id/last_name_edit_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/period_text_view" />
+            app:layout_constraintTop_toBottomOf="@id/max_amount_seek_bar" />
 
         <EditText
             android:id="@+id/last_name_edit_text"

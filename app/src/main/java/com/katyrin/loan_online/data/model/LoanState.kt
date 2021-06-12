@@ -1,7 +1,7 @@
 package com.katyrin.loan_online.data.model
 
-enum class LoanState(state: String) {
-    APPROVED("APPROVED"),
-    REGISTERED("REGISTERED"),
-    REJECTED("REJECTED")
+enum class LoanState {
+    APPROVED,
+    REGISTERED,
+    REJECTED
 }

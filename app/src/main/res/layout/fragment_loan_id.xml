@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/fragment_horizontal_margin"
+    android:paddingEnd="@dimen/fragment_horizontal_margin"
+    android:background="@color/white"
+    tools:context=".ui.loans.LoanIdFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/date_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_vertical_margin"
+                android:layout_marginBottom="@dimen/fragment_vertical_margin"
+                android:gravity="center"
+                android:text="@string/detailed_information_from"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@id/first_name_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/first_name_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_vertical_margin"
+                android:layout_marginBottom="@dimen/fragment_vertical_margin"
+                android:text="@string/borrower_name"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/last_name_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/date_text_view" />
+
+            <TextView
+                android:id="@+id/last_name_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_vertical_margin"
+                android:layout_marginBottom="@dimen/fragment_vertical_margin"
+                android:text="@string/borrower_s_surname"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/amount_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/first_name_text_view" />
+
+            <TextView
+                android:id="@+id/amount_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_vertical_margin"
+                android:layout_marginBottom="@dimen/fragment_vertical_margin"
+                android:text="@string/text_amount"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/percent_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/last_name_text_view" />
+
+            <TextView
+                android:id="@+id/percent_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_vertical_margin"
+                android:layout_marginBottom="@dimen/fragment_vertical_margin"
+                android:text="@string/text_percent"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/period_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/amount_text_view" />
+
+            <TextView
+                android:id="@+id/period_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_vertical_margin"
+                android:layout_marginBottom="@dimen/fragment_vertical_margin"
+                android:text="@string/text_period"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/phone_number_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/percent_text_view" />
+
+            <TextView
+                android:id="@+id/phone_number_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_vertical_margin"
+                android:layout_marginBottom="@dimen/fragment_vertical_margin"
+                android:text="@string/phone_number"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/state_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/period_text_view" />
+
+            <TextView
+                android:id="@+id/state_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_vertical_margin"
+                android:layout_marginBottom="@dimen/fragment_vertical_margin"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/info_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phone_number_text_view" />
+
+            <TextView
+                android:id="@+id/info_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_vertical_margin"
+                android:layout_marginBottom="@dimen/fragment_vertical_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/state_text_view" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</FrameLayout>

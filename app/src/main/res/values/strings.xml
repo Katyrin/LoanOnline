@@ -57,4 +57,12 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="detailed_information_from">Detailed information on a loan request from:</string>
+    <string name="borrower_name">Borrower name:</string>
+    <string name="borrower_s_surname">Borrower surname:</string>
+    <string name="phone_number">Phone number:</string>
+
+    <string name="text_approved_state">Your loan application has been approved!</string>
+    <string name="text_rejected_state">Your loan application has been rejected</string>
+    <string name="text_registered_state">Your loan application is being processed</string>
 </resources>

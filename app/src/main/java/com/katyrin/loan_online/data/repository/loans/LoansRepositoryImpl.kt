@@ -10,4 +10,7 @@ class LoansRepositoryImpl @Inject constructor(
 ) : LoansRepository {
     override fun getLoans(token: String): Single<List<LoanDTO>> =
         loansDataSource.getLoans(token)
+
+    override fun getLoanFromId(token: String, id: Int): Single<LoanDTO> =
+        loansDataSource.getLoanFromId(token, id)
 }

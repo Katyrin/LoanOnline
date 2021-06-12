@@ -8,23 +8,27 @@ import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.data.model.LoanState
 import com.katyrin.loan_online.databinding.ItemLoanBinding
 
-class LoansRecyclerAdapter(private val loans: List<LoanDTO>) :
-    RecyclerView.Adapter<LoansRecyclerAdapter.ViewHolder>() {
+class LoansRecyclerAdapter(
+    private val loans: List<LoanDTO>,
+    private val onClick: (id: Int) -> Unit
+) : RecyclerView.Adapter<LoansRecyclerAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val itemBinding: ItemLoanBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(loan: LoanDTO) {
             itemBinding.amountTextView.text = loan.amount.toString()
-            itemBinding.loanStateImage.setImageResource(getImageId(loan))
-            LoanState.APPROVED
+            val resId = loan.state?.let { getImageId(it) } ?: R.drawable.ic_unknow_state
+            itemBinding.loanStateImage.setImageResource(resId)
+            itemBinding.root.setOnClickListener {
+                loan.id?.let { id -> onClick(id) }
+            }
         }
 
-        private fun getImageId(loan: LoanDTO): Int =
-            when(loan.state) {
+        private fun getImageId(state: LoanState): Int =
+            when (state) {
                 LoanState.APPROVED -> R.drawable.ic_approved
                 LoanState.REGISTERED -> R.drawable.ic_wait_money
                 LoanState.REJECTED -> R.drawable.ic_rejected
-                else -> R.drawable.ic_unknow_state
             }
     }
 

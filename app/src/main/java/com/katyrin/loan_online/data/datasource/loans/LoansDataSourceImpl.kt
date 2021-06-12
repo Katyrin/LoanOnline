@@ -12,4 +12,8 @@ class LoansDataSourceImpl @Inject constructor(
     override fun getLoans(token: String): Single<List<LoanDTO>> =
         api.getLoans(token)
             .subscribeOn(Schedulers.io())
+
+    override fun getLoanFromId(token: String, id: Int): Single<LoanDTO> =
+        api.getLoanFromId(token, id)
+            .subscribeOn(Schedulers.io())
 }

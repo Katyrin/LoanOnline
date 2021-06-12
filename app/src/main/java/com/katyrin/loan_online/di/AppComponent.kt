@@ -2,6 +2,7 @@ package com.katyrin.loan_online.di
 
 import com.katyrin.loan_online.ui.loanconditions.LoanConditionsFragment
 import com.katyrin.loan_online.ui.loanrequest.LoanRequestFragment
+import com.katyrin.loan_online.ui.loans.LoanIdFragment
 import com.katyrin.loan_online.ui.loans.LoansFragment
 import com.katyrin.loan_online.ui.login.LoginFragment
 import dagger.Component
@@ -20,4 +21,5 @@ interface AppComponent {
     fun inject(loanRequestFragment: LoanRequestFragment)
     fun inject(loanConditionsFragment: LoanConditionsFragment)
     fun inject(loansFragment: LoansFragment)
+    fun inject(loanIdFragment: LoanIdFragment)
 }

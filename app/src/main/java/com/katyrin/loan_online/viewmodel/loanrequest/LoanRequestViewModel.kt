@@ -24,8 +24,8 @@ class LoanRequestViewModel @Inject constructor(
     private val _dataForm = MutableLiveData<ImportantDataState>()
     val dataFormState: LiveData<ImportantDataState> = _dataForm
 
-    private val _loanRequestResult = MutableLiveData<LoanRequestResult>()
-    val loanRequestResult: LiveData<LoanRequestResult> = _loanRequestResult
+    private val _loanRequestState = MutableLiveData<LoanRequestState>()
+    val loanRequestState: LiveData<LoanRequestState> = _loanRequestState
 
     fun sendRequest(token: String?, loanRequest: LoanRequest) {
         val dispose = token?.let {
@@ -40,11 +40,11 @@ class LoanRequestViewModel @Inject constructor(
     }
 
     private fun successState(loanDTO: LoanDTO) {
-        _loanRequestResult.value = LoanRequestResult.Success(loanDTO)
+        _loanRequestState.value = LoanRequestState.Success(loanDTO)
     }
 
     private fun setErrorStateServer() {
-        _loanRequestResult.value = LoanRequestResult.Error
+        _loanRequestState.value = LoanRequestState.Error
     }
 
     fun subscribeImportantDataChanged(textInput: Flowable<Triple<String, String, String>>) {

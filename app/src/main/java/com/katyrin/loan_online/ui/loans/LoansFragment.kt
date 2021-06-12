@@ -65,7 +65,14 @@ class LoansFragment : Fragment() {
     }
 
     private fun setRecyclerViewAdapter(loans: List<LoanDTO>) {
-        binding?.loansRecyclerView?.adapter = LoansRecyclerAdapter(loans)
+        binding?.loansRecyclerView?.adapter = LoansRecyclerAdapter(loans) { addLoanIdFragment(it) }
+    }
+
+    private fun addLoanIdFragment(id: Int) {
+        parentFragmentManager.beginTransaction()
+            .add(R.id.container, LoanIdFragment.newInstance(id))
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun showRequestFailed() {

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,7 +20,7 @@ import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
 import com.katyrin.loan_online.ui.success.SuccessFragment
 import com.katyrin.loan_online.utils.afterTextChanged
 import com.katyrin.loan_online.viewmodel.loanrequest.ImportantDataState
-import com.katyrin.loan_online.viewmodel.loanrequest.LoanRequestResult
+import com.katyrin.loan_online.viewmodel.loanrequest.LoanRequestState
 import com.katyrin.loan_online.viewmodel.loanrequest.LoanRequestViewModel
 import io.reactivex.BackpressureStrategy
 import io.reactivex.subjects.BehaviorSubject
@@ -64,19 +65,22 @@ class LoanRequestFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         loanRequestViewModel.dataFormState.observe(viewLifecycleOwner) { handleImportantDataState(it) }
-        loanRequestViewModel.loanRequestResult.observe(viewLifecycleOwner) { handleRequestResult(it) }
+        loanRequestViewModel.loanRequestState.observe(viewLifecycleOwner) { handleRequestResult(it) }
         loanRequestViewModel.subscribeImportantDataChanged(textInput)
         initViews()
         setButtonClick()
     }
 
-    private fun handleRequestResult(state: LoanRequestResult) {
+    private fun handleRequestResult(state: LoanRequestState) {
         when (state) {
-            is LoanRequestResult.Success -> {
+            is LoanRequestState.Success -> {
                 replaceSuccessFragment(state.loanDTO)
             }
-            is LoanRequestResult.Error -> {
+            is LoanRequestState.Error -> {
                 showRequestFailed()
+            }
+            is LoanRequestState.Loading -> {
+                //TODO progress bar
             }
         }
     }
@@ -107,19 +111,33 @@ class LoanRequestFragment : Fragment() {
 
     private fun initViews() {
         setText()
+        setSeekBar()
         binding?.firstNameEditText?.afterTextChanged { onNextTextInput() }
         binding?.lastNameEditText?.afterTextChanged { onNextTextInput() }
         binding?.phoneNumberEditText?.afterTextChanged { onNextTextInput() }
     }
 
     private fun setText() {
-        val maxAmount = "${getString(R.string.max_amount)} $maxAmount"
         val percent =
             "${getString(R.string.text_percent)} $percent ${getString(R.string.percent_symbol)}"
         val period = "${getString(R.string.text_period)} $period"
-        binding?.maxAmountTextView?.text = maxAmount
         binding?.percentTextView?.text = percent
         binding?.periodTextView?.text = period
+    }
+
+    private fun setSeekBar() {
+        binding?.maxAmountSeekBar?.apply {
+            max = maxAmount!!
+            setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                    val amount = "${getString(R.string.text_amount)} $progress"
+                    binding?.maxAmountTextView?.text = amount
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+            })
+        }
     }
 
     private fun onNextTextInput() {
@@ -142,7 +160,7 @@ class LoanRequestFragment : Fragment() {
 
     private fun getLoanRequestEntity(): LoanRequest =
         LoanRequest(
-            maxAmount,
+            binding?.maxAmountSeekBar?.progress,
             binding?.firstNameEditText?.text.toString(),
             binding?.lastNameEditText?.text.toString(),
             percent,
