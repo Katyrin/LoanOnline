@@ -57,7 +57,9 @@
     <string name="theme_key">theme key</string>
     <string name="language_key">language key</string>
     <string name="log_out_key">log out key</string>
-    
+    <string name="dark_mode_def_value">MODE_NIGHT_FOLLOW_SYSTEM</string>
+    <string name="dark_mode">Dark Mode</string>
+
     <string name="exit_message">Are you sure you want to log out of your account?</string>
     <string name="exit">Exit</string>
     <string name="close">Close</string>
