@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.data.model.LoanRequest
 import com.katyrin.loan_online.data.repository.loanrequest.LoanRequestRepository
-import com.katyrin.loan_online.utils.HALF_SECOND
+import com.katyrin.loan_online.utils.QUARTER_SECOND
 import com.katyrin.loan_online.utils.MINIMUM_PHONE_NUMBER
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -50,7 +50,7 @@ class LoanRequestViewModel @Inject constructor(
     fun subscribeImportantDataChanged(textInput: Flowable<Triple<String, String, String>>) {
         disposable?.add(
             textInput
-                .debounce(HALF_SECOND, TimeUnit.MILLISECONDS)
+                .debounce(QUARTER_SECOND, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.computation())
                 .distinctUntilChanged()
                 .observeOn(AndroidSchedulers.mainThread())

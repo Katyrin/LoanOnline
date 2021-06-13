@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.katyrin.loan_online.data.model.User
 import com.katyrin.loan_online.data.repository.login.LoginRepository
-import com.katyrin.loan_online.utils.HALF_SECOND
+import com.katyrin.loan_online.utils.QUARTER_SECOND
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -26,22 +26,16 @@ class LoginViewModel @Inject constructor(
     val loginResult: LiveData<LoginResult> = _loginResult
 
     private var disposable: CompositeDisposable? = CompositeDisposable()
-    private var user: User? = null
-    private var token: String? = null
 
     fun registration(username: String, password: String) {
-        user = User(username, password)
-        val dispose = user?.let {
-            loginRepository.postRegistration(it)
+        disposable?.add(
+            loginRepository.postRegistration(User(username, password))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { login(User(username, password)) },
                     { setErrorStateServer() }
                 )
-        }
-        if (dispose != null) {
-            disposable?.add(dispose)
-        }
+        )
     }
 
     private fun login(user: User) {
@@ -53,8 +47,7 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun setSuccessStateServer(responseBody: ResponseBody) {
-        token = responseBody.string()
-        _loginResult.value = LoginResult.Success(token, user)
+        _loginResult.value = LoginResult.Success(responseBody.string())
     }
 
     private fun setErrorStateServer() {
@@ -64,7 +57,7 @@ class LoginViewModel @Inject constructor(
     fun subscribeLoginDataChanged(textInput: Flowable<Pair<String, String>>) {
         disposable?.add(
             textInput
-                .debounce(HALF_SECOND, TimeUnit.MILLISECONDS)
+                .debounce(QUARTER_SECOND, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.computation())
                 .distinctUntilChanged()
                 .observeOn(AndroidSchedulers.mainThread())

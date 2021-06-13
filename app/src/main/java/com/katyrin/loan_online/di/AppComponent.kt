@@ -1,5 +1,6 @@
 package com.katyrin.loan_online.di
 
+import com.katyrin.loan_online.ui.activities.SplashActivity
 import com.katyrin.loan_online.ui.loanconditions.LoanConditionsFragment
 import com.katyrin.loan_online.ui.loanrequest.LoanRequestFragment
 import com.katyrin.loan_online.ui.loans.LoanIdFragment
@@ -25,4 +26,5 @@ interface AppComponent {
     fun inject(loansFragment: LoansFragment)
     fun inject(loanIdFragment: LoanIdFragment)
     fun inject(exitDialog: ExitDialog)
+    fun inject(splashActivity: SplashActivity)
 }

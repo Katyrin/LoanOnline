@@ -103,14 +103,18 @@ class LoginFragment : Fragment() {
         binding?.loading?.isVisible = false
         when (state) {
             is LoginResult.Success -> {
-                updateUiWithUser(state.user?.name)
-                saveData(state.token, state.user?.name, state.user?.password)
-                replaceInfoViewPagerFragment()
+                successRenderData(state.token)
             }
             is LoginResult.Error -> {
                 showLoginFailed()
             }
         }
+    }
+
+    private fun successRenderData(token: String?) {
+        updateUiWithUser()
+        saveData(token, binding?.username?.text.toString(), binding?.password?.text.toString())
+        replaceInfoViewPagerFragment()
     }
 
     private fun saveData(token: String?, name: String?, password: String?) {
@@ -126,9 +130,9 @@ class LoginFragment : Fragment() {
             .commitNow()
     }
 
-    private fun updateUiWithUser(text: String?) {
+    private fun updateUiWithUser() {
         val welcome = getString(R.string.welcome)
-        Toast.makeText(requireContext(), "$welcome $text", Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), "$welcome ${prefs.userName}", Toast.LENGTH_LONG).show()
     }
 
     private fun showLoginFailed() {

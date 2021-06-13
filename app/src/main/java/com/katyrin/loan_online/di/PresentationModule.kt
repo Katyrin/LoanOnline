@@ -8,6 +8,7 @@ import com.katyrin.loan_online.viewmodel.loanrequest.LoanRequestViewModel
 import com.katyrin.loan_online.viewmodel.loans.LoanIdViewModel
 import com.katyrin.loan_online.viewmodel.loans.LoansViewModel
 import com.katyrin.loan_online.viewmodel.login.LoginViewModel
+import com.katyrin.loan_online.viewmodel.splash.SplashViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -47,4 +48,9 @@ interface PresentationModule {
     @IntoMap
     @ViewModelKey(ExitViewModel::class)
     fun exitViewModel(viewModel: ExitViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SplashViewModel::class)
+    fun splashViewModel(viewModel: SplashViewModel): ViewModel
 }
