@@ -35,7 +35,7 @@ class LoginViewModel @Inject constructor(
             loginRepository.postRegistration(it)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                    { login() },
+                    { login(User(username, password)) },
                     { setErrorStateServer() }
                 )
         }
@@ -44,15 +44,12 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    private fun login() {
-        val dispose = user?.let { it ->
-            loginRepository.postLogin(it)
+    private fun login(user: User) {
+        disposable?.add(
+            loginRepository.postLogin(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(::setSuccessStateServer) { setErrorStateServer() }
-        }
-        if (dispose != null) {
-            disposable?.add(dispose)
-        }
+        )
     }
 
     private fun setSuccessStateServer(responseBody: ResponseBody) {

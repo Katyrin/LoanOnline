@@ -8,6 +8,7 @@ import com.katyrin.loan_online.data.repository.loans.LoansRepository
 import com.katyrin.loan_online.viewmodel.loanrequest.LoanRequestState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class LoanIdViewModel @Inject constructor(
@@ -23,8 +24,9 @@ class LoanIdViewModel @Inject constructor(
         _loanRequestState.value = LoanRequestState.Loading
         val dispose = token?.let {
             loansRepository
-                .getLoanFromId(it, id)
+                .getLoanById(it, id)
                 .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
                 .subscribe(::successState) { setErrorStateServer() }
         }
         if (dispose != null) {

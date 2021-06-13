@@ -41,16 +41,21 @@ class LoansFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initRecyclerView()
         loansViewModel.loansRequestState.observe(viewLifecycleOwner) { renderData(it) }
         prefs.token?.let { loansViewModel.getLoans(it) }
     }
 
+    private fun initRecyclerView() {
+        binding?.loansRecyclerView?.adapter = LoansRecyclerAdapter { addLoanIdFragment(it) }
+    }
+
     private fun renderData(state: LoansRequestState) {
-        when(state) {
+        when (state) {
             is LoansRequestState.Success -> {
                 binding?.progressBar?.isVisible = false
                 binding?.loansRecyclerView?.isVisible = true
-                setRecyclerViewAdapter(state.loans)
+                updateList(state.loans)
             }
             is LoansRequestState.Loading -> {
                 binding?.progressBar?.isVisible = true
@@ -64,8 +69,8 @@ class LoansFragment : Fragment() {
         }
     }
 
-    private fun setRecyclerViewAdapter(loans: List<LoanDTO>) {
-        binding?.loansRecyclerView?.adapter = LoansRecyclerAdapter(loans) { addLoanIdFragment(it) }
+    private fun updateList(loans: List<LoanDTO>) {
+        (binding?.loansRecyclerView?.adapter as LoansRecyclerAdapter).updateLoansList(loans)
     }
 
     private fun addLoanIdFragment(id: Int) {

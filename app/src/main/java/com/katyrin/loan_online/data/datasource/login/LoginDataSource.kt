@@ -6,6 +6,6 @@ import io.reactivex.Single
 import okhttp3.ResponseBody
 
 interface LoginDataSource {
-    fun postRegistration(user: User) : Single<UserRegistrationDTO>
-    fun postLogin(user: User) : Single<ResponseBody>
+    fun postRegistration(user: User): Single<UserRegistrationDTO>
+    fun postLogin(user: User): Single<ResponseBody>
 }

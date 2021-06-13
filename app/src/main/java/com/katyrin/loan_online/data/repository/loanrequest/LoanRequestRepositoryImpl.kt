@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class LoanRequestRepositoryImpl @Inject constructor(
     private val loanRequestDataSource: LoanRequestDataSource
-): LoanRequestRepository {
+) : LoanRequestRepository {
     override fun postLoansRequest(token: String, loanRequest: LoanRequest): Single<LoanDTO> =
         loanRequestDataSource.postLoansRequest(token, loanRequest)
 }

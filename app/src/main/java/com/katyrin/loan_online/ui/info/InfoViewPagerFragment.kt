@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.databinding.FragmentInfoViewPagerBinding
 import com.katyrin.loan_online.ui.loanconditions.LoanConditionsFragment
-import com.katyrin.loan_online.ui.loanrequest.LoanRequestFragment
 
 
 class InfoViewPagerFragment : Fragment() {

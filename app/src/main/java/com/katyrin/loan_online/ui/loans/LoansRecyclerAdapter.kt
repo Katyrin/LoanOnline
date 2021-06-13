@@ -9,7 +9,6 @@ import com.katyrin.loan_online.data.model.LoanState
 import com.katyrin.loan_online.databinding.ItemLoanBinding
 
 class LoansRecyclerAdapter(
-    private val loans: List<LoanDTO>,
     private val onClick: (id: Int) -> Unit
 ) : RecyclerView.Adapter<LoansRecyclerAdapter.ViewHolder>() {
 
@@ -17,10 +16,10 @@ class LoansRecyclerAdapter(
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(loan: LoanDTO) {
             itemBinding.amountTextView.text = loan.amount.toString()
-            val resId = loan.state?.let { getImageId(it) } ?: R.drawable.ic_unknow_state
+            val resId = getImageId(loan.state)
             itemBinding.loanStateImage.setImageResource(resId)
             itemBinding.root.setOnClickListener {
-                loan.id?.let { id -> onClick(id) }
+                onClick(loan.id)
             }
         }
 
@@ -30,6 +29,13 @@ class LoansRecyclerAdapter(
                 LoanState.REGISTERED -> R.drawable.ic_wait_money
                 LoanState.REJECTED -> R.drawable.ic_rejected
             }
+    }
+
+    private var loans: List<LoanDTO> = listOf()
+
+    fun updateLoansList(loans: List<LoanDTO>) {
+        this.loans = loans
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -19,14 +19,11 @@ class ViewPagerAdapter(
             itemBinding.infoText.text = texts[position]
             itemBinding.infoImage.setImageResource(images[position])
             itemBinding.tryButton.isVisible = ((itemCount - ONE_ITEM) == position)
-            itemBinding.tryButton.setOnClickListener {
-                onClick()
-            }
+            itemBinding.tryButton.setOnClickListener { onClick() }
         }
     }
 
     override fun getItemCount(): Int = texts.size
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -37,6 +34,4 @@ class ViewPagerAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(position)
     }
-
-
 }

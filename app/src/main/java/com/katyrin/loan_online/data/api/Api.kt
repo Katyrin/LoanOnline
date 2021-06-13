@@ -40,7 +40,7 @@ interface Api {
 
     @Headers(value = ["accept: */*"])
     @GET("loans/{id}")
-    fun getLoanFromId(
+    fun getLoanById(
         @Header("Authorization") token: String,
         @Path(value = "id", encoded = true) id: Int
     ): Single<LoanDTO>

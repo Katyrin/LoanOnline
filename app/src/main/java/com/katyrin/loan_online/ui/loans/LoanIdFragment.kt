@@ -54,12 +54,12 @@ class LoanIdFragment : Fragment() {
     }
 
     private fun renderData(state: LoanRequestState) {
-        when(state) {
+        when (state) {
             is LoanRequestState.Success -> {
                 binding?.progressBar?.isVisible = false
                 binding?.scrollView?.isVisible = true
                 setInfo(state.loanDTO)
-                state.loanDTO.state?.let { setStateLoan(it) }
+                setStateLoan(state.loanDTO.state)
             }
             is LoanRequestState.Loading -> {
                 binding?.progressBar?.isVisible = true
@@ -95,7 +95,7 @@ class LoanIdFragment : Fragment() {
     }
 
     private fun setStateLoan(state: LoanState) {
-        when(state) {
+        when (state) {
             LoanState.APPROVED -> {
                 binding?.infoTextView?.isVisible = true
                 binding?.stateTextView?.text = getText(R.string.text_approved_state)

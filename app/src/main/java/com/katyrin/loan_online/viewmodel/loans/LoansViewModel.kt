@@ -7,6 +7,7 @@ import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.data.repository.loans.LoansRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class LoansViewModel @Inject constructor(
@@ -20,8 +21,10 @@ class LoansViewModel @Inject constructor(
     fun getLoans(token: String) {
         _loansRequestState.value = LoansRequestState.Loading
         disposable?.add(
-            loansRepository.getLoans(token)
+            loansRepository
+                .getLoans(token)
                 .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
                 .subscribe(::successState) { setErrorStateServer() }
         )
     }

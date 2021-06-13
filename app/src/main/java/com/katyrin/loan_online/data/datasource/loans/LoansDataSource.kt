@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 interface LoansDataSource {
     fun getLoans(token: String): Single<List<LoanDTO>>
-    fun getLoanFromId(token: String, id: Int): Single<LoanDTO>
+    fun getLoanById(token: String, id: Int): Single<LoanDTO>
 }
