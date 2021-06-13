@@ -2,6 +2,7 @@ package com.katyrin.loan_online.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.katyrin.loan_online.viewmodel.exit.ExitViewModel
 import com.katyrin.loan_online.viewmodel.loanconditions.LoanConditionsViewModel
 import com.katyrin.loan_online.viewmodel.loanrequest.LoanRequestViewModel
 import com.katyrin.loan_online.viewmodel.loans.LoanIdViewModel
@@ -41,4 +42,9 @@ interface PresentationModule {
     @IntoMap
     @ViewModelKey(LoanIdViewModel::class)
     fun loanIdViewModel(viewModel: LoanIdViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ExitViewModel::class)
+    fun exitViewModel(viewModel: ExitViewModel): ViewModel
 }

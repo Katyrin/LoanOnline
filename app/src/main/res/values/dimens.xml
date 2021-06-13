@@ -2,6 +2,7 @@
 <resources>
     <dimen name="fragment_horizontal_margin">16dp</dimen>
     <dimen name="fragment_vertical_margin">16dp</dimen>
+    <dimen name="view_margin">8dp</dimen>
     <dimen name="padding_max">32dp</dimen>
     <dimen name="text_size_header">32sp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->

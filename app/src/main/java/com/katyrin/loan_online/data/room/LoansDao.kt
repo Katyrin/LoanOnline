@@ -19,4 +19,7 @@ interface LoansDao {
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun putLoanById(loan: LoanEntity): Completable
+
+    @Query("DELETE FROM loans")
+    fun deleteLoansTable(): Completable
 }
