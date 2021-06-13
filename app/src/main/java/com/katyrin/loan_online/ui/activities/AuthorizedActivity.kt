@@ -13,7 +13,7 @@ import com.katyrin.loan_online.di.AppComponent
 import com.katyrin.loan_online.utils.findFragment
 
 class AuthorizedActivity : AppCompatActivity(),
-    BottomNavigationView.OnNavigationItemSelectedListener, OnAppCompatActivity {
+    BottomNavigationView.OnNavigationItemSelectedListener, OnAppCompatActivity, OnHomeScreen {
 
     override var appComponent: AppComponent? = null
     private var binding: ActivityAuthorizedBinding? = null
@@ -96,5 +96,12 @@ class AuthorizedActivity : AppCompatActivity(),
         appComponent = null
         binding = null
         super.onDestroy()
+    }
+
+    override fun onHomeScreen() {
+        binding?.bottomNavigation?.apply {
+            setOnNavigationItemSelectedListener(this@AuthorizedActivity)
+            selectedItemId = R.id.home
+        }
     }
 }

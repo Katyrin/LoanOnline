@@ -1,25 +1,34 @@
 package com.katyrin.loan_online.ui.success
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.katyrin.loan_online.ui.activities.AuthorizedActivity
 import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.databinding.FragmentSuccessBinding
+import com.katyrin.loan_online.ui.activities.AuthorizedActivity
+import com.katyrin.loan_online.ui.activities.OnHomeScreen
 
 class SuccessFragment : Fragment() {
 
     private var loanDTO: LoanDTO? = null
     private var binding: FragmentSuccessBinding? = null
+    private var listener: OnHomeScreen? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             loanDTO = it.getParcelable(LOAN_DTO)
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (requireActivity() is AuthorizedActivity)
+            listener = (context as AuthorizedActivity)
     }
 
     override fun onCreateView(
@@ -36,6 +45,14 @@ class SuccessFragment : Fragment() {
 
     private fun setButtonClick() {
         binding?.okButton?.setOnClickListener {
+            setButtonAction()
+        }
+    }
+
+    private fun setButtonAction() {
+        if (requireActivity() is AuthorizedActivity) {
+            listener?.onHomeScreen()
+        } else {
             startActivity(Intent(requireContext(), AuthorizedActivity::class.java))
             requireActivity().finish()
         }
@@ -58,6 +75,8 @@ class SuccessFragment : Fragment() {
     override fun onDetach() {
         loanDTO = null
         binding = null
+        if (requireActivity() is AuthorizedActivity)
+            listener = null
         super.onDetach()
     }
 

@@ -1,6 +1,7 @@
 package com.katyrin.loan_online.ui.login
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.katyrin.loan_online.App
 import com.katyrin.loan_online.Prefs
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.databinding.FragmentLoginBinding
+import com.katyrin.loan_online.ui.activities.AuthorizedActivity
 import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
 import com.katyrin.loan_online.ui.info.InfoViewPagerFragment
 import com.katyrin.loan_online.utils.afterTextChanged
@@ -53,13 +55,12 @@ class LoginFragment : Fragment() {
         loginViewModel.loginResult.observe(viewLifecycleOwner) { handleLoginResult(it) }
 
         loginViewModel.subscribeLoginDataChanged(textInput)
-        initViews()
+        initEditTextViews()
+        initButtons()
     }
 
-    private fun initViews() {
+    private fun initEditTextViews() {
         binding?.username?.afterTextChanged { onNextTextInput() }
-        binding?.login?.setOnClickListener { startRegistration() }
-
         binding?.password?.apply {
             afterTextChanged { onNextTextInput() }
 
@@ -72,13 +73,35 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun initButtons() {
+        binding?.registrationButton?.setOnClickListener { startRegistration() }
+        binding?.loginButton?.setOnClickListener { startLogin() }
+        binding?.registeredButton?.setOnClickListener {
+            binding?.registeredButton?.isVisible = false
+            binding?.noRegisteredButton?.isVisible = true
+        }
+        binding?.noRegisteredButton?.setOnClickListener {
+            binding?.registeredButton?.isVisible = true
+            binding?.noRegisteredButton?.isVisible = false
+        }
+    }
+
     private fun onNextTextInput() {
         _textInput.onNext(binding?.username?.text.toString() to binding?.password?.text.toString())
     }
 
     private fun startRegistration() {
-        if (binding?.login?.isEnabled == true) {
+        if (binding?.registrationButton?.isEnabled == true) {
             loginViewModel.registration(
+                binding?.username?.text.toString(),
+                binding?.password?.text.toString()
+            )
+        }
+    }
+
+    private fun startLogin() {
+        if (binding?.loginButton?.isEnabled == true) {
+            loginViewModel.login(
                 binding?.username?.text.toString(),
                 binding?.password?.text.toString()
             )
@@ -94,7 +117,8 @@ class LoginFragment : Fragment() {
                 binding?.password?.error = getString(R.string.invalid_password)
             }
             is LoginFormState.Success -> {
-                binding?.login?.isEnabled = true
+                binding?.registrationButton?.isEnabled = true
+                binding?.loginButton?.isEnabled = true
             }
         }
     }
@@ -102,8 +126,11 @@ class LoginFragment : Fragment() {
     private fun handleLoginResult(state: LoginResult) {
         binding?.loading?.isVisible = false
         when (state) {
-            is LoginResult.Success -> {
-                successRenderData(state.token)
+            is LoginResult.SuccessRegistration -> {
+                successRegistrationRenderData(state.token)
+            }
+            is LoginResult.SuccessLogin -> {
+                successLoginRenderData(state.token)
             }
             is LoginResult.Error -> {
                 showLoginFailed()
@@ -111,10 +138,17 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun successRenderData(token: String?) {
+    private fun successRegistrationRenderData(token: String?) {
         updateUiWithUser()
         saveData(token, binding?.username?.text.toString(), binding?.password?.text.toString())
         replaceInfoViewPagerFragment()
+    }
+
+    private fun successLoginRenderData(token: String?) {
+        updateUiWithUser()
+        saveData(token, binding?.username?.text.toString(), binding?.password?.text.toString())
+        startActivity(Intent(requireContext(), AuthorizedActivity::class.java))
+        requireActivity().finish()
     }
 
     private fun saveData(token: String?, name: String?, password: String?) {

@@ -32,22 +32,34 @@ class LoginViewModel @Inject constructor(
             loginRepository.postRegistration(User(username, password))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                    { login(User(username, password)) },
+                    { loginAfterRegistration(User(username, password)) },
                     { setErrorStateServer() }
                 )
         )
     }
 
-    private fun login(user: User) {
+    private fun loginAfterRegistration(user: User) {
         disposable?.add(
             loginRepository.postLogin(user)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(::setSuccessStateServer) { setErrorStateServer() }
+                .subscribe(::setSuccessRegistration) { setErrorStateServer() }
         )
     }
 
-    private fun setSuccessStateServer(responseBody: ResponseBody) {
-        _loginResult.value = LoginResult.Success(responseBody.string())
+    fun login(username: String, password: String) {
+        disposable?.add(
+            loginRepository.postLogin(User(username, password))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(::setSuccessLogin) { setErrorStateServer() }
+        )
+    }
+
+    private fun setSuccessRegistration(responseBody: ResponseBody) {
+        _loginResult.value = LoginResult.SuccessRegistration(responseBody.string())
+    }
+
+    private fun setSuccessLogin(responseBody: ResponseBody) {
+        _loginResult.value = LoginResult.SuccessLogin(responseBody.string())
     }
 
     private fun setErrorStateServer() {
