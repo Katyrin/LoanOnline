@@ -68,7 +68,6 @@ class LoanRequestFragment : Fragment() {
         loanRequestViewModel.loanRequestState.observe(viewLifecycleOwner) { handleRequestResult(it) }
         loanRequestViewModel.subscribeImportantDataChanged(textInput)
         initViews()
-        setButtonClick()
     }
 
     private fun handleRequestResult(state: LoanRequestState) {
@@ -112,9 +111,16 @@ class LoanRequestFragment : Fragment() {
     private fun initViews() {
         setText()
         setSeekBar()
+        binding?.sendRequestButton?.setOnClickListener { sendLoanRequest() }
         binding?.firstNameEditText?.afterTextChanged { onNextTextInput() }
         binding?.lastNameEditText?.afterTextChanged { onNextTextInput() }
-        binding?.phoneNumberEditText?.afterTextChanged { onNextTextInput() }
+        binding?.phoneNumberEditText?.apply {
+            afterTextChanged { onNextTextInput() }
+            setOnEditorActionListener { _, _, _ ->
+                sendLoanRequest()
+                false
+            }
+        }
     }
 
     private fun setText() {
@@ -154,11 +160,9 @@ class LoanRequestFragment : Fragment() {
         )
     }
 
-    private fun setButtonClick() {
-        binding?.sendRequestButton?.setOnClickListener {
-            if (binding?.sendRequestButton?.isEnabled == true) {
-                loanRequestViewModel.sendRequest(prefs.token, getLoanRequestEntity())
-            }
+    private fun sendLoanRequest() {
+        if (binding?.sendRequestButton?.isEnabled == true) {
+            loanRequestViewModel.sendRequest(prefs.token, getLoanRequestEntity())
         }
     }
 

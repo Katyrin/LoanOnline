@@ -18,6 +18,7 @@ class LoansRecyclerAdapter(
             itemBinding.amountTextView.text = loan.amount.toString()
             val resId = getImageId(loan.state)
             itemBinding.loanStateImage.setImageResource(resId)
+            itemBinding.dateTextView.text = getDateText(loan.date)
             itemBinding.root.setOnClickListener {
                 onClick(loan.id)
             }
@@ -29,6 +30,8 @@ class LoansRecyclerAdapter(
                 LoanState.REGISTERED -> R.drawable.ic_wait_money
                 LoanState.REJECTED -> R.drawable.ic_rejected
             }
+
+        private fun getDateText(text: String): String = text.split("T")[0]
     }
 
     private var loans: List<LoanDTO> = listOf()

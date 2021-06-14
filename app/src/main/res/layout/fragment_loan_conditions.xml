@@ -8,17 +8,20 @@
 
     <TextView
         android:id="@+id/loan_terms_text_view"
-        android:layout_width="wrap_content"
+        style="@style/BaseTextStyle.Header.Normal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/loan_terms_text"
         app:layout_constraintBottom_toTopOf="@id/max_amount_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/max_amount_text_view"
-        android:layout_width="wrap_content"
+        style="@style/BaseTextStyle.NormalText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/max_amount"
         app:layout_constraintBottom_toTopOf="@id/percent_text_view"
@@ -28,7 +31,8 @@
 
     <TextView
         android:id="@+id/percent_text_view"
-        android:layout_width="wrap_content"
+        style="@style/BaseTextStyle.NormalText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/text_percent_layout"
         app:layout_constraintBottom_toTopOf="@id/period_text_view"
@@ -38,7 +42,8 @@
 
     <TextView
         android:id="@+id/period_text_view"
-        android:layout_width="wrap_content"
+        style="@style/BaseTextStyle.NormalText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/text_period_layout"
         app:layout_constraintBottom_toTopOf="@id/agree_button"
@@ -50,8 +55,8 @@
         android:id="@+id/agree_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_normal"
         android:text="@string/i_m_agree"
-        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,18 +64,15 @@
 
     <ProgressBar
         android:id="@+id/loading"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="64dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

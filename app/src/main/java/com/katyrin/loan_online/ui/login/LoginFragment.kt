@@ -139,14 +139,14 @@ class LoginFragment : Fragment() {
     }
 
     private fun successRegistrationRenderData(token: String?) {
-        updateUiWithUser()
         saveData(token, binding?.username?.text.toString(), binding?.password?.text.toString())
+        updateUiWithUser()
         replaceInfoViewPagerFragment()
     }
 
     private fun successLoginRenderData(token: String?) {
-        updateUiWithUser()
         saveData(token, binding?.username?.text.toString(), binding?.password?.text.toString())
+        updateUiWithUser()
         startActivity(Intent(requireContext(), AuthorizedActivity::class.java))
         requireActivity().finish()
     }

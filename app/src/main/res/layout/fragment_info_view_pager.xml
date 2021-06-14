@@ -19,7 +19,7 @@
     <me.relex.circleindicator.CircleIndicator3
         android:id="@+id/indicator"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/circleind_icator_height"
+        android:layout_height="@dimen/indicator_height"
         app:ci_drawable="@drawable/swipe_indicator_active"
         app:ci_drawable_unselected="@drawable/swipe_indicator_passive"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -7,6 +7,7 @@ import com.katyrin.loan_online.ui.loans.LoanIdFragment
 import com.katyrin.loan_online.ui.loans.LoansFragment
 import com.katyrin.loan_online.ui.login.LoginFragment
 import com.katyrin.loan_online.ui.settings.ExitDialog
+import com.katyrin.loan_online.ui.success.SuccessFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -27,4 +28,5 @@ interface AppComponent {
     fun inject(loanIdFragment: LoanIdFragment)
     fun inject(exitDialog: ExitDialog)
     fun inject(splashActivity: SplashActivity)
+    fun inject(successFragment: SuccessFragment)
 }

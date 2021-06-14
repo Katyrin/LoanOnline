@@ -2,17 +2,22 @@
     <!-- Base application theme. -->
     <style name="Theme.LoanOnline" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/cerulean</item>
+        <item name="colorPrimaryVariant">@color/dark_cerulean</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorSecondary">@color/limeade</item>
+        <item name="colorSecondaryVariant">@color/bilbao</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
         <!-- Customize your theme here. -->
-        <item name="colorSecondaryAlpha40">@color/teal_200Alpha40</item>
+        <item name="colorSecondaryAlpha40">@color/limeade_alpha40</item>
+        <item name="headerTextColor">@color/header_text_color_light</item>
+        <item name="normalTextColor">@color/normal_text_color_light</item>
+        <item name="infoTextColor">@color/info_text_color_light</item>
+        <item name="strokeColor">@color/stroke_color_light</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 </resources>

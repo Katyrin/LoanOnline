@@ -5,6 +5,7 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Register</string>
     <string name="login">Login</string>
+    <string name="success">Success</string>
     <string name="already_registration_text">Have an account</string>
     <string name="no_registration_text">Have no account</string>
     <string name="action_sign_in_short">Sign in</string>
@@ -38,7 +39,6 @@
     <string name="invalid_first_name">Not a valid First Name</string>
     <string name="invalid_last_name">Not a valid Last Name</string>
     <string name="invalid_phone_number">Not a valid phone number</string>
-    <string name="successful_application_submission">Successful application submission</string>
     <string name="ok">OK</string>
     <string name="loan_terms_text">At the moment, the loan is available on the terms</string>
     <string name="max_amount">Max amount:</string>
@@ -76,4 +76,7 @@
     <string name="text_approved_state">Your loan application has been approved!</string>
     <string name="text_rejected_state">Your loan application has been rejected</string>
     <string name="text_registered_state">Your loan application is being processed</string>
+    <string name="success_info">* To receive money, contact any branch of our bank or contact us by phone to arrange a loan transfer to your card.</string>
+    <string name="info_request">* Expect notification of loan approval soon, or you can check the information yourself on the home screen.</string>
+    <string name="id">Id:</string>
 </resources>

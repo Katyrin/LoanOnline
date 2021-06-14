@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="@dimen/fragment_horizontal_margin"
-    android:paddingEnd="@dimen/fragment_horizontal_margin"
-    android:background="@color/white"
+    android:background="?colorOnPrimary"
     tools:context=".ui.loans.LoanIdFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -16,17 +14,16 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/margin_normal"
+            android:paddingEnd="@dimen/margin_normal">
 
             <TextView
                 android:id="@+id/date_text_view"
-                android:layout_width="wrap_content"
+                style="@style/BaseTextStyle.Header.Normal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/fragment_vertical_margin"
-                android:layout_marginBottom="@dimen/fragment_vertical_margin"
-                android:gravity="center"
                 android:text="@string/detailed_information_from"
-                android:textSize="24sp"
                 app:layout_constraintBottom_toTopOf="@id/first_name_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -34,12 +31,10 @@
 
             <TextView
                 android:id="@+id/first_name_text_view"
+                style="@style/BaseTextStyle.NormalText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/fragment_vertical_margin"
-                android:layout_marginBottom="@dimen/fragment_vertical_margin"
                 android:text="@string/borrower_name"
-                android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@id/last_name_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,12 +42,10 @@
 
             <TextView
                 android:id="@+id/last_name_text_view"
+                style="@style/BaseTextStyle.NormalText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/fragment_vertical_margin"
-                android:layout_marginBottom="@dimen/fragment_vertical_margin"
                 android:text="@string/borrower_s_surname"
-                android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@id/amount_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -60,12 +53,10 @@
 
             <TextView
                 android:id="@+id/amount_text_view"
+                style="@style/BaseTextStyle.NormalText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/fragment_vertical_margin"
-                android:layout_marginBottom="@dimen/fragment_vertical_margin"
                 android:text="@string/text_amount"
-                android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@id/percent_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,12 +64,10 @@
 
             <TextView
                 android:id="@+id/percent_text_view"
+                style="@style/BaseTextStyle.NormalText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/fragment_vertical_margin"
-                android:layout_marginBottom="@dimen/fragment_vertical_margin"
                 android:text="@string/text_percent"
-                android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@id/period_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -86,12 +75,10 @@
 
             <TextView
                 android:id="@+id/period_text_view"
+                style="@style/BaseTextStyle.NormalText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/fragment_vertical_margin"
-                android:layout_marginBottom="@dimen/fragment_vertical_margin"
                 android:text="@string/text_period"
-                android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@id/phone_number_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -99,35 +86,42 @@
 
             <TextView
                 android:id="@+id/phone_number_text_view"
+                style="@style/BaseTextStyle.NormalText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/fragment_vertical_margin"
-                android:layout_marginBottom="@dimen/fragment_vertical_margin"
                 android:text="@string/phone_number"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@id/state_text_view"
+                app:layout_constraintBottom_toTopOf="@id/id_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/period_text_view" />
 
             <TextView
-                android:id="@+id/state_text_view"
+                android:id="@+id/id_text_view"
+                style="@style/BaseTextStyle.NormalText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/fragment_vertical_margin"
-                android:layout_marginBottom="@dimen/fragment_vertical_margin"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@id/info_text_view"
+                android:text="@string/id"
+                app:layout_constraintBottom_toTopOf="@id/state_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/phone_number_text_view" />
 
             <TextView
+                android:id="@+id/state_text_view"
+                style="@style/BaseTextStyle.NormalText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/info_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/id_text_view" />
+
+            <TextView
                 android:id="@+id/info_text_view"
+                style="@style/BaseTextStyle.InfoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/fragment_vertical_margin"
-                android:layout_marginBottom="@dimen/fragment_vertical_margin"
+                android:text="@string/success_info"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Text styles. -->
+    <style name="BaseTextStyle">
+        <item name="android:textColor">?headerTextColor</item>
+    </style>
+
+    <style name="BaseTextStyle.NormalText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_header_min</item>
+        <item name="android:layout_margin">@dimen/margin_normal</item>
+        <item name="android:textColor">?normalTextColor</item>
+    </style>
+
+    <style name="BaseTextStyle.InfoText">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:layout_margin">@dimen/margin_normal</item>
+        <item name="android:textColor">?normalTextColor</item>
+    </style>
+
+    <style name="BaseTextStyle.Date">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:textColor">?normalTextColor</item>
+    </style>
+
+    <style name="BaseTextStyle.Header">
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="BaseTextStyle.Header.Recycler">
+        <item name="android:textColor">?normalTextColor</item>
+        <item name="android:textSize">@dimen/text_size_header_min</item>
+    </style>
+
+    <style name="BaseTextStyle.Header.Min">
+        <item name="android:textColor">?normalTextColor</item>
+        <item name="android:textSize">@dimen/text_size_header_min</item>
+        <item name="android:layout_margin">@dimen/margin_min</item>
+    </style>
+
+    <style name="BaseTextStyle.Header.Max">
+        <item name="android:textSize">@dimen/text_size_header_max</item>
+        <item name="android:layout_margin">@dimen/margin_max</item>
+    </style>
+
+    <style name="BaseTextStyle.Header.Normal">
+        <item name="android:textSize">@dimen/text_size_header_normal</item>
+        <item name="android:layout_margin">@dimen/margin_normal</item>
+    </style>
+
+    <!-- Bottom navigation style. -->
+    <style name="BottomNavigationStyle">
+        <item name="elevation">@dimen/bottom_navigation_elevation</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="labelVisibilityMode">selected</item>
+    </style>
+
+    <!-- Text input styles. -->
+    <style name="PersonName">
+        <item name="android:inputType">textPersonName</item>
+        <item name="android:selectAllOnFocus">true</item>
+    </style>
+
+    <style name="EndPhoneNumber">
+        <item name="android:inputType">phone</item>
+        <item name="android:imeActionLabel">@string/send_request</item>
+        <item name="android:imeOptions">actionDone</item>
+        <item name="android:selectAllOnFocus">true</item>
+        <item name="android:hint">@string/enter_phone_number</item>
+    </style>
+
+    <style name="EndPassword">
+        <item name="android:inputType">textPassword</item>
+        <item name="android:imeActionLabel">@string/action_sign_in_short</item>
+        <item name="android:imeOptions">actionDone</item>
+        <item name="android:selectAllOnFocus">true</item>
+        <item name="android:hint">@string/prompt_password</item>
+    </style>
+
+    <!-- Button styles. -->
+
+    <style name="ButtonLoginSecond">
+        <item name="android:layout_marginStart">@dimen/margin_normal</item>
+        <item name="android:layout_marginEnd">@dimen/margin_normal</item>
+        <item name="android:layout_gravity">start</item>
+        <item name="android:enabled">false</item>
+        <item name="layout_constraintVertical_bias">0.2</item>
+    </style>
+
+    <style name="ButtonLoginFirst" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:layout_marginStart">@dimen/margin_normal</item>
+        <item name="android:layout_marginEnd">@dimen/margin_normal</item>
+        <item name="android:layout_marginTop">@dimen/margin_normal</item>
+        <item name="android:layout_marginBottom">@dimen/margin_bottom_login</item>
+        <item name="android:layout_gravity">start</item>
+        <item name="layout_constraintVertical_bias">0.2</item>
+    </style>
+
+</resources>

@@ -20,6 +20,9 @@ class LoanIdViewModel @Inject constructor(
     private val _loanRequestState = MutableLiveData<LoanRequestState>()
     val loanRequestState: LiveData<LoanRequestState> = _loanRequestState
 
+    private val _dateText = MutableLiveData<Pair<String, String>>()
+    val dateText: LiveData<Pair<String, String>> = _dateText
+
     fun getLoanInfo(token: String?, id: Int) {
         _loanRequestState.value = LoanRequestState.Loading
         val dispose = token?.let {
@@ -40,6 +43,14 @@ class LoanIdViewModel @Inject constructor(
 
     private fun setErrorStateServer() {
         _loanRequestState.value = LoanRequestState.Error
+    }
+
+    fun getDateText(text: String) {
+        val delimiters = arrayOf("T", ".")
+        val listDate = text.split(*delimiters)
+        val day = listDate[0]
+        val time = listDate[1]
+        _dateText.value = day to time
     }
 
     override fun onCleared() {

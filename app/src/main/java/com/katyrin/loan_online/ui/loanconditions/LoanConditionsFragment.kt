@@ -69,27 +69,48 @@ class LoanConditionsFragment : Fragment() {
     private fun handleRequestResult(state: LoanConditionsState) {
         when (state) {
             is LoanConditionsState.Success -> {
-                setViews(state.loanConditionsDTO)
+                setInfo(state.loanConditionsDTO)
                 setButtonClick(state.loanConditionsDTO)
+                notLoadingVisibility()
             }
             is LoanConditionsState.Loading -> {
-                binding?.loading?.isVisible = true
-                binding?.agreeButton?.isEnabled = false
+                loadingVisibility()
             }
             is LoanConditionsState.Error -> {
+                notLoadingVisibility()
                 showRequestFailed()
             }
         }
     }
 
-    private fun setViews(loanConditionsDTO: LoanConditionsDTO) {
+    private fun loadingVisibility() {
+        binding?.apply {
+            loading.isVisible = true
+            agreeButton.isVisible = false
+            loanTermsTextView.isVisible = false
+            maxAmountTextView.isVisible = false
+            percentTextView.isVisible = false
+            periodTextView.isVisible = false
+        }
+    }
+
+    private fun notLoadingVisibility() {
+        binding?.apply {
+            loading.isVisible = false
+            agreeButton.isVisible = true
+            loanTermsTextView.isVisible = true
+            maxAmountTextView.isVisible = true
+            percentTextView.isVisible = true
+            periodTextView.isVisible = true
+        }
+    }
+
+    private fun setInfo(loanConditionsDTO: LoanConditionsDTO) {
         val maxAmount = "${getString(R.string.max_amount)} ${loanConditionsDTO.maxAmount}"
-        val percent = "${getString(R.string.text_percent)} ${loanConditionsDTO.percent} " +
-                getString(R.string.percent_symbol)
+        val percent =
+            "${getString(R.string.text_percent)} " + loanConditionsDTO.percent + getString(R.string.percent_symbol)
         val period = "${getString(R.string.text_period)} ${loanConditionsDTO.period}"
         binding?.apply {
-            agreeButton.isEnabled = true
-            loading.isVisible = false
             maxAmountTextView.text = maxAmount
             percentTextView.text = percent
             periodTextView.text = period
@@ -97,7 +118,6 @@ class LoanConditionsFragment : Fragment() {
     }
 
     private fun showRequestFailed() {
-        binding?.loading?.isVisible = false
         Toast.makeText(
             requireContext(),
             R.string.loan_conditions_request_failed,

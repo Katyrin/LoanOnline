@@ -4,42 +4,40 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/view_margin">
+    android:padding="@dimen/margin_min">
 
     <TextView
-        android:id="@+id/textView"
+        style="@style/BaseTextStyle.Header.Normal"
+        android:id="@+id/text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/view_margin"
-        android:gravity="center"
         android:text="@string/exit_message"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/positiveButtonDialog"
+        app:layout_constraintBottom_toTopOf="@+id/negative_button_dialog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/negativeButtonDialog"
+        android:id="@+id/negative_button_dialog"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/view_margin"
+        android:layout_margin="@dimen/margin_min"
         android:text="@string/close"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/positiveButtonDialog"
+        app:layout_constraintEnd_toStartOf="@+id/positive_button_dialog"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/positiveButtonDialog"
+        android:id="@+id/positive_button_dialog"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/view_margin"
+        android:layout_margin="@dimen/margin_min"
         android:text="@string/exit"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/negative_button_dialog"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/negativeButtonDialog"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toEndOf="@+id/negative_button_dialog"
+        app:layout_constraintTop_toTopOf="@+id/negative_button_dialog" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
