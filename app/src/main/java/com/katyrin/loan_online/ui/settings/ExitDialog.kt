@@ -66,7 +66,10 @@ class ExitDialog : BottomSheetDialogFragment() {
     }
 
     private fun clearPrefs() {
-        SessionManager(requireContext()).saveAuthToken(null, null, null)
+        SessionManager(requireContext()).apply {
+            saveAuthToken(null, null, null)
+            saveIsRegistered(false)
+        }
     }
 
     override fun onDetach() {

@@ -19,9 +19,11 @@ import com.katyrin.loan_online.ui.activities.AuthorizedActivity
 import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
 import com.katyrin.loan_online.ui.info.InfoViewPagerFragment
 import com.katyrin.loan_online.utils.afterTextChanged
+import com.katyrin.loan_online.utils.showErrorMessage
+import com.katyrin.loan_online.utils.toast
 import com.katyrin.loan_online.viewmodel.login.LoginFormState
-import com.katyrin.loan_online.viewmodel.login.LoginResult
 import com.katyrin.loan_online.viewmodel.login.LoginViewModel
+import com.katyrin.loan_online.viewmodel.login.RequestState
 import io.reactivex.BackpressureStrategy
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
@@ -50,7 +52,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         loginViewModel.loginFormState.observe(viewLifecycleOwner) { handleLoginState(it) }
-        loginViewModel.loginResult.observe(viewLifecycleOwner) { handleLoginResult(it) }
+        loginViewModel.requestState.observe(viewLifecycleOwner) { handleLoginResult(it) }
 
         loginViewModel.subscribeLoginDataChanged(textInput)
         initEditTextViews()
@@ -77,10 +79,12 @@ class LoginFragment : Fragment() {
         binding?.registeredButton?.setOnClickListener {
             binding?.registeredButton?.isVisible = false
             binding?.noRegisteredButton?.isVisible = true
+            SessionManager(requireContext()).saveIsRegistered(true)
         }
         binding?.noRegisteredButton?.setOnClickListener {
             binding?.registeredButton?.isVisible = true
             binding?.noRegisteredButton?.isVisible = false
+            SessionManager(requireContext()).saveIsRegistered(false)
         }
     }
 
@@ -121,28 +125,65 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun handleLoginResult(state: LoginResult) {
-        binding?.loading?.isVisible = false
+    private fun handleLoginResult(state: RequestState<String>) {
         when (state) {
-            is LoginResult.SuccessRegistration -> {
-                successRegistrationRenderData(state.token)
+            is RequestState.Success -> {
+                visibleScreenState()
+                setSuccessState(state.value)
             }
-            is LoginResult.SuccessLogin -> {
-                successLoginRenderData(state.token)
+            is RequestState.ServerError -> {
+                visibleScreenState()
+                requireContext().toast(getString(R.string.server_error))
             }
-            is LoginResult.Error -> {
-                showLoginFailed()
+            is RequestState.ClientError -> {
+                visibleScreenState()
+                requireContext().showErrorMessage(state.code)
+            }
+            is RequestState.Loading -> {
+                loadingState()
             }
         }
     }
 
-    private fun successRegistrationRenderData(token: String?) {
+    private fun loadingState() {
+        binding?.apply {
+            usernameLayout.isVisible = false
+            passwordLayout.isVisible = false
+            registeredButton.isVisible = false
+            noRegisteredButton.isVisible = false
+            registrationButton.isVisible = false
+            loginButton.isVisible = false
+            progressBar.isVisible = true
+        }
+    }
+
+    private fun visibleScreenState() {
+        binding?.apply {
+            usernameLayout.isVisible = true
+            passwordLayout.isVisible = true
+            registeredButton.isVisible = true
+            noRegisteredButton.isVisible = true
+            registrationButton.isVisible = true
+            loginButton.isVisible = true
+            progressBar.isVisible = false
+        }
+    }
+
+    private fun setSuccessState(token: String) {
+        if (!SessionManager(requireContext()).getIisRegistered()) {
+            successRegistrationRenderData(token)
+        } else {
+            successLoginRenderData(token)
+        }
+    }
+
+    private fun successRegistrationRenderData(token: String) {
         saveData(token, binding?.username?.text.toString(), binding?.password?.text.toString())
         updateUiWithUser()
         replaceInfoViewPagerFragment()
     }
 
-    private fun successLoginRenderData(token: String?) {
+    private fun successLoginRenderData(token: String) {
         saveData(token, binding?.username?.text.toString(), binding?.password?.text.toString())
         updateUiWithUser()
         startActivity(Intent(requireContext(), AuthorizedActivity::class.java))
@@ -168,10 +209,6 @@ class LoginFragment : Fragment() {
         val welcome =
             getString(R.string.welcome) + " ${SessionManager(requireContext()).fetchUserName()}"
         Toast.makeText(requireContext(), welcome, Toast.LENGTH_LONG).show()
-    }
-
-    private fun showLoginFailed() {
-        Toast.makeText(requireContext(), R.string.login_failed, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDetach() {

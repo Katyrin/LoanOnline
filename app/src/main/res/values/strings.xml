@@ -79,4 +79,10 @@
     <string name="success_info">* To receive money, contact any branch of our bank or contact us by phone to arrange a loan transfer to your card.</string>
     <string name="info_request">* Expect notification of loan approval soon, or you can check the information yourself on the home screen.</string>
     <string name="id">Id:</string>
+
+    <string name="server_error">Internal server error. Try again after a while.</string>
+    <string name="exist_user">A user with this login already exists. Give yourself a different username.</string>
+    <string name="user_unauthorized">User authorization error. The system cannot find your username.</string>
+    <string name="access_denied">Access to the resource is denied.</string>
+    <string name="user_not_found">User not found. Check or correct your login details</string>
 </resources>
