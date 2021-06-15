@@ -1,8 +1,8 @@
-package com.katyrin.loan_online.di
+package com.katyrin.loan_online.di.modules
 
 import android.content.Context
 import androidx.room.Room
-import com.katyrin.loan_online.data.room.LoansDataBase
+import com.katyrin.loan_online.data.storage.LoansDataBase
 import com.katyrin.loan_online.utils.DB_NAME
 import dagger.Module
 import dagger.Provides

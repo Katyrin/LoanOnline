@@ -15,7 +15,7 @@ import com.katyrin.loan_online.databinding.FragmentSuccessBinding
 import com.katyrin.loan_online.ui.activities.AuthorizedActivity
 import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
 import com.katyrin.loan_online.ui.activities.OnHomeScreen
-import com.katyrin.loan_online.viewmodel.success.SuccessViewModel
+import com.katyrin.loan_online.viewmodel.SuccessViewModel
 import javax.inject.Inject
 
 class SuccessFragment : Fragment() {

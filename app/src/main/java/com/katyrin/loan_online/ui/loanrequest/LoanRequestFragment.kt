@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -17,9 +17,11 @@ import com.katyrin.loan_online.databinding.FragmentLoanRequestBinding
 import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
 import com.katyrin.loan_online.ui.success.SuccessFragment
 import com.katyrin.loan_online.utils.afterTextChanged
-import com.katyrin.loan_online.viewmodel.loanrequest.ImportantDataState
-import com.katyrin.loan_online.viewmodel.loanrequest.LoanRequestState
-import com.katyrin.loan_online.viewmodel.loanrequest.LoanRequestViewModel
+import com.katyrin.loan_online.utils.showErrorMessage
+import com.katyrin.loan_online.utils.toast
+import com.katyrin.loan_online.viewmodel.LoanRequestViewModel
+import com.katyrin.loan_online.viewmodel.appstates.ImportantDataState
+import com.katyrin.loan_online.viewmodel.appstates.RequestState
 import io.reactivex.BackpressureStrategy
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
@@ -62,21 +64,29 @@ class LoanRequestFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         loanRequestViewModel.dataFormState.observe(viewLifecycleOwner) { handleImportantDataState(it) }
-        loanRequestViewModel.loanRequestState.observe(viewLifecycleOwner) { handleRequestResult(it) }
+        loanRequestViewModel.requestState.observe(viewLifecycleOwner) { handleRequestResult(it) }
         loanRequestViewModel.subscribeImportantDataChanged(textInput)
         initViews()
     }
 
-    private fun handleRequestResult(state: LoanRequestState) {
+    private fun handleRequestResult(state: RequestState<LoanDTO>) {
         when (state) {
-            is LoanRequestState.Success -> {
-                replaceSuccessFragment(state.loanDTO)
+            is RequestState.Success -> {
+                replaceSuccessFragment(state.value)
             }
-            is LoanRequestState.Error -> {
-                showRequestFailed()
+            is RequestState.ServerError -> {
+                binding?.scrollView?.isVisible = true
+                binding?.progressBar?.isVisible = false
+                requireContext().toast(getString(R.string.server_error))
             }
-            is LoanRequestState.Loading -> {
-                //TODO progress bar
+            is RequestState.ClientError -> {
+                binding?.scrollView?.isVisible = true
+                binding?.progressBar?.isVisible = false
+                requireContext().showErrorMessage(state.code)
+            }
+            is RequestState.Loading -> {
+                binding?.scrollView?.isVisible = false
+                binding?.progressBar?.isVisible = true
             }
         }
     }
@@ -172,10 +182,6 @@ class LoanRequestFragment : Fragment() {
             period,
             binding?.phoneNumberEditText?.text.toString()
         )
-
-    private fun showRequestFailed() {
-        Toast.makeText(requireContext(), R.string.loan_request_failed, Toast.LENGTH_SHORT).show()
-    }
 
     override fun onDetach() {
         binding = null

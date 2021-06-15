@@ -1,15 +1,10 @@
-package com.katyrin.loan_online.di
+package com.katyrin.loan_online.di.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.katyrin.loan_online.viewmodel.exit.ExitViewModel
-import com.katyrin.loan_online.viewmodel.loanconditions.LoanConditionsViewModel
-import com.katyrin.loan_online.viewmodel.loanrequest.LoanRequestViewModel
-import com.katyrin.loan_online.viewmodel.loans.LoanIdViewModel
-import com.katyrin.loan_online.viewmodel.loans.LoansViewModel
-import com.katyrin.loan_online.viewmodel.login.LoginViewModel
-import com.katyrin.loan_online.viewmodel.splash.SplashViewModel
-import com.katyrin.loan_online.viewmodel.success.SuccessViewModel
+import com.katyrin.loan_online.di.ViewModelFactory
+import com.katyrin.loan_online.di.ViewModelKey
+import com.katyrin.loan_online.viewmodel.*
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

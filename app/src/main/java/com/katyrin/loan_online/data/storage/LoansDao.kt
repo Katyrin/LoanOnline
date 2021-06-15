@@ -1,4 +1,4 @@
-package com.katyrin.loan_online.data.room
+package com.katyrin.loan_online.data.storage
 
 import androidx.room.*
 import com.katyrin.loan_online.data.model.LoanEntity

@@ -1,6 +1,6 @@
 package com.katyrin.loan_online.data.datasource.exit
 
-import com.katyrin.loan_online.data.room.LoansDataBase
+import com.katyrin.loan_online.data.storage.LoansDataBase
 import io.reactivex.Completable
 import javax.inject.Inject
 

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,8 +14,10 @@ import com.katyrin.loan_online.data.model.LoanConditionsDTO
 import com.katyrin.loan_online.databinding.FragmentLoanConditionsBinding
 import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
 import com.katyrin.loan_online.ui.loanrequest.LoanRequestFragment
-import com.katyrin.loan_online.viewmodel.loanconditions.LoanConditionsState
-import com.katyrin.loan_online.viewmodel.loanconditions.LoanConditionsViewModel
+import com.katyrin.loan_online.utils.showErrorMessage
+import com.katyrin.loan_online.utils.toast
+import com.katyrin.loan_online.viewmodel.LoanConditionsViewModel
+import com.katyrin.loan_online.viewmodel.appstates.RequestState
 import javax.inject.Inject
 
 class LoanConditionsFragment : Fragment() {
@@ -39,7 +40,7 @@ class LoanConditionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loanConditionsViewModel.loanConditionsState.observe(viewLifecycleOwner) {
+        loanConditionsViewModel.requestState.observe(viewLifecycleOwner) {
             handleRequestResult(it)
         }
         loanConditionsViewModel.getLoanConditions()
@@ -63,24 +64,28 @@ class LoanConditionsFragment : Fragment() {
             .commitNow()
     }
 
-    private fun handleRequestResult(state: LoanConditionsState) {
+    private fun handleRequestResult(state: RequestState<LoanConditionsDTO>) {
         when (state) {
-            is LoanConditionsState.Success -> {
-                setInfo(state.loanConditionsDTO)
-                setButtonClick(state.loanConditionsDTO)
-                notLoadingVisibility()
+            is RequestState.Success -> {
+                setInfo(state.value)
+                setButtonClick(state.value)
+                visibleScreenState()
             }
-            is LoanConditionsState.Loading -> {
-                loadingVisibility()
+            is RequestState.Loading -> {
+                loadingState()
             }
-            is LoanConditionsState.Error -> {
-                notLoadingVisibility()
-                showRequestFailed()
+            is RequestState.ServerError -> {
+                visibleScreenState()
+                requireContext().toast(getString(R.string.server_error))
+            }
+            is RequestState.ClientError -> {
+                visibleScreenState()
+                requireContext().showErrorMessage(state.code)
             }
         }
     }
 
-    private fun loadingVisibility() {
+    private fun loadingState() {
         binding?.apply {
             loading.isVisible = true
             agreeButton.isVisible = false
@@ -91,7 +96,7 @@ class LoanConditionsFragment : Fragment() {
         }
     }
 
-    private fun notLoadingVisibility() {
+    private fun visibleScreenState() {
         binding?.apply {
             loading.isVisible = false
             agreeButton.isVisible = true
@@ -112,14 +117,6 @@ class LoanConditionsFragment : Fragment() {
             percentTextView.text = percent
             periodTextView.text = period
         }
-    }
-
-    private fun showRequestFailed() {
-        Toast.makeText(
-            requireContext(),
-            R.string.loan_conditions_request_failed,
-            Toast.LENGTH_SHORT
-        ).show()
     }
 
     override fun onDetach() {

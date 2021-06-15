@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -16,8 +15,10 @@ import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.data.model.LoanState
 import com.katyrin.loan_online.databinding.FragmentLoanIdBinding
 import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
-import com.katyrin.loan_online.viewmodel.loanrequest.LoanRequestState
-import com.katyrin.loan_online.viewmodel.loans.LoanIdViewModel
+import com.katyrin.loan_online.utils.showErrorMessage
+import com.katyrin.loan_online.utils.toast
+import com.katyrin.loan_online.viewmodel.LoanIdViewModel
+import com.katyrin.loan_online.viewmodel.appstates.RequestState
 import javax.inject.Inject
 
 class LoanIdFragment : Fragment() {
@@ -46,16 +47,23 @@ class LoanIdFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loanIdViewModel.loanRequestState.observe(viewLifecycleOwner) { renderData(it) }
+        loanIdViewModel.requestState.observe(viewLifecycleOwner) { renderData(it) }
         loanIdViewModel.dateText.observe(viewLifecycleOwner) { setDateText(it) }
         id?.let { loanIdViewModel.getLoanInfo(it) }
     }
 
-    private fun renderData(state: LoanRequestState) {
+    private fun renderData(state: RequestState<LoanDTO>) {
         when (state) {
-            is LoanRequestState.Success -> setSuccessState(state.loanDTO)
-            is LoanRequestState.Loading -> setLoadingState()
-            is LoanRequestState.Error -> setErrorState()
+            is RequestState.Success -> setSuccessState(state.value)
+            is RequestState.Loading -> setLoadingState()
+            is RequestState.ServerError -> {
+                setErrorState()
+                requireContext().toast(getString(R.string.server_error))
+            }
+            is RequestState.ClientError -> {
+                setErrorState()
+                requireContext().showErrorMessage(state.code)
+            }
         }
     }
 
@@ -75,7 +83,6 @@ class LoanIdFragment : Fragment() {
     private fun setErrorState() {
         binding?.progressBar?.isVisible = false
         binding?.scrollView?.isVisible = true
-        showRequestFailed()
     }
 
     private fun setDateText(date: Pair<String, String>) {
@@ -126,10 +133,6 @@ class LoanIdFragment : Fragment() {
                 binding?.stateTextView?.text = getText(R.string.text_registered_state)
             }
         }
-    }
-
-    private fun showRequestFailed() {
-        Toast.makeText(requireContext(), R.string.loan_request_failed, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDetach() {

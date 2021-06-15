@@ -1,4 +1,4 @@
-package com.katyrin.loan_online.viewmodel.login
+package com.katyrin.loan_online.viewmodel.appstates
 
 sealed class LoginFormState {
     object ErrorUserName : LoginFormState()

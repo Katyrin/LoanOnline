@@ -1,13 +1,12 @@
 package com.katyrin.loan_online.data.api.interceptor
 
 import android.content.Context
+import com.katyrin.loan_online.SessionManager
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 
-class HeaderInterceptor @Inject constructor(
-    context: Context
-) : Interceptor {
+class HeaderInterceptor @Inject constructor(context: Context) : Interceptor {
 
     private val sessionManager = SessionManager(context)
 

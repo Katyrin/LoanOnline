@@ -1,5 +1,6 @@
 package com.katyrin.loan_online.di
 
+import com.katyrin.loan_online.di.modules.*
 import com.katyrin.loan_online.ui.activities.SplashActivity
 import com.katyrin.loan_online.ui.loanconditions.LoanConditionsFragment
 import com.katyrin.loan_online.ui.loanrequest.LoanRequestFragment
@@ -14,7 +15,8 @@ import javax.inject.Singleton
 @Component(
     modules = [
         ApiModule::class,
-        DataModule::class,
+        RepositoryModule::class,
+        DataSourceModule::class,
         PresentationModule::class,
         AppModule::class
     ]

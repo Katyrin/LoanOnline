@@ -3,8 +3,8 @@ package com.katyrin.loan_online.data.datasource.cache
 import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.data.model.LoanEntity
 import com.katyrin.loan_online.data.model.LoanState
-import com.katyrin.loan_online.data.room.LoansDao
-import com.katyrin.loan_online.data.room.LoansDataBase
+import com.katyrin.loan_online.data.storage.LoansDao
+import com.katyrin.loan_online.data.storage.LoansDataBase
 import com.katyrin.loan_online.utils.LOAN_INFORMATION_NOT_FOUND
 import io.reactivex.Single
 import javax.inject.Inject

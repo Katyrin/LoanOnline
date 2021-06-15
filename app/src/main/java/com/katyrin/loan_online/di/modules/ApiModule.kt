@@ -1,4 +1,4 @@
-package com.katyrin.loan_online.di
+package com.katyrin.loan_online.di.modules
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder

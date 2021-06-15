@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,8 +13,10 @@ import com.katyrin.loan_online.R
 import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.databinding.FragmentLoansBinding
 import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
-import com.katyrin.loan_online.viewmodel.loans.LoansRequestState
-import com.katyrin.loan_online.viewmodel.loans.LoansViewModel
+import com.katyrin.loan_online.utils.showErrorMessage
+import com.katyrin.loan_online.utils.toast
+import com.katyrin.loan_online.viewmodel.LoansViewModel
+import com.katyrin.loan_online.viewmodel.appstates.RequestState
 import javax.inject.Inject
 
 class LoansFragment : Fragment() {
@@ -39,7 +40,7 @@ class LoansFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        loansViewModel.loansRequestState.observe(viewLifecycleOwner) { renderData(it) }
+        loansViewModel.requestState.observe(viewLifecycleOwner) { renderData(it) }
         loansViewModel.getLoans()
     }
 
@@ -47,21 +48,26 @@ class LoansFragment : Fragment() {
         binding?.loansRecyclerView?.adapter = LoansRecyclerAdapter { addLoanIdFragment(it) }
     }
 
-    private fun renderData(state: LoansRequestState) {
+    private fun renderData(state: RequestState<List<LoanDTO>>) {
         when (state) {
-            is LoansRequestState.Success -> {
+            is RequestState.Success -> {
                 binding?.progressBar?.isVisible = false
                 binding?.loansRecyclerView?.isVisible = true
-                updateList(state.loans)
+                updateList(state.value)
             }
-            is LoansRequestState.Loading -> {
+            is RequestState.Loading -> {
                 binding?.progressBar?.isVisible = true
                 binding?.loansRecyclerView?.isVisible = false
             }
-            is LoansRequestState.Error -> {
+            is RequestState.ServerError -> {
                 binding?.progressBar?.isVisible = false
                 binding?.loansRecyclerView?.isVisible = true
-                showRequestFailed()
+                requireContext().toast(getString(R.string.server_error))
+            }
+            is RequestState.ClientError -> {
+                binding?.progressBar?.isVisible = false
+                binding?.loansRecyclerView?.isVisible = true
+                requireContext().showErrorMessage(state.code)
             }
         }
     }
@@ -75,10 +81,6 @@ class LoansFragment : Fragment() {
             .add(R.id.container, LoanIdFragment.newInstance(id))
             .addToBackStack(null)
             .commit()
-    }
-
-    private fun showRequestFailed() {
-        Toast.makeText(requireContext(), R.string.loan_request_failed, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDetach() {

@@ -7,13 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.katyrin.loan_online.R
-import com.katyrin.loan_online.data.api.interceptor.SessionManager
+import com.katyrin.loan_online.SessionManager
 import com.katyrin.loan_online.databinding.FragmentLoginBinding
 import com.katyrin.loan_online.ui.activities.AuthorizedActivity
 import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
@@ -21,9 +20,9 @@ import com.katyrin.loan_online.ui.info.InfoViewPagerFragment
 import com.katyrin.loan_online.utils.afterTextChanged
 import com.katyrin.loan_online.utils.showErrorMessage
 import com.katyrin.loan_online.utils.toast
-import com.katyrin.loan_online.viewmodel.login.LoginFormState
-import com.katyrin.loan_online.viewmodel.login.LoginViewModel
-import com.katyrin.loan_online.viewmodel.login.RequestState
+import com.katyrin.loan_online.viewmodel.LoginViewModel
+import com.katyrin.loan_online.viewmodel.appstates.LoginFormState
+import com.katyrin.loan_online.viewmodel.appstates.RequestState
 import io.reactivex.BackpressureStrategy
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
@@ -190,12 +189,8 @@ class LoginFragment : Fragment() {
         requireActivity().finish()
     }
 
-    private fun saveData(token: String?, name: String?, password: String?) {
-        SessionManager(requireContext()).saveAuthToken(
-            token.toString(),
-            name.toString(),
-            password.toString()
-        )
+    private fun saveData(token: String, name: String, password: String) {
+        SessionManager(requireContext()).saveAuthToken(token, name, password)
     }
 
     private fun replaceInfoViewPagerFragment() {
@@ -208,7 +203,7 @@ class LoginFragment : Fragment() {
     private fun updateUiWithUser() {
         val welcome =
             getString(R.string.welcome) + " ${SessionManager(requireContext()).fetchUserName()}"
-        Toast.makeText(requireContext(), welcome, Toast.LENGTH_LONG).show()
+        requireContext().toast(welcome)
     }
 
     override fun onDetach() {

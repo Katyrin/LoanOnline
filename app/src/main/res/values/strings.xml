@@ -85,4 +85,5 @@
     <string name="user_unauthorized">User authorization error. The system cannot find your username.</string>
     <string name="access_denied">Access to the resource is denied.</string>
     <string name="user_not_found">User not found. Check or correct your login details</string>
+    <string name="unknown_error">Unknown error</string>
 </resources>

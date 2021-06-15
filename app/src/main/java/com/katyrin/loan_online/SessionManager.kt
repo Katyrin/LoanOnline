@@ -1,8 +1,7 @@
-package com.katyrin.loan_online.data.api.interceptor
+package com.katyrin.loan_online
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.katyrin.loan_online.R
 import com.katyrin.loan_online.utils.IS_REGISTERED
 import com.katyrin.loan_online.utils.SHARED_PREFERENCES_PASSWORD
 import com.katyrin.loan_online.utils.SHARED_PREFERENCES_TOKEN
@@ -28,7 +27,6 @@ class SessionManager @Inject constructor(context: Context) {
     }
 
     fun getIisRegistered(): Boolean = prefs.getBoolean(IS_REGISTERED, false)
-
     fun fetchAuthToken(): String? = prefs.getString(SHARED_PREFERENCES_TOKEN, null)
     fun fetchUserName(): String? = prefs.getString(SHARED_PREFERENCES_USERNAME, null)
 }

@@ -1,4 +1,4 @@
-package com.katyrin.loan_online.viewmodel.success
+package com.katyrin.loan_online.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

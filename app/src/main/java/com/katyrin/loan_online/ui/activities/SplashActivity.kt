@@ -8,12 +8,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.katyrin.loan_online.App
-import com.katyrin.loan_online.data.api.interceptor.SessionManager
+import com.katyrin.loan_online.SessionManager
 import com.katyrin.loan_online.databinding.ActivitySplashBinding
 import com.katyrin.loan_online.utils.SPLASH_ACTIVITY_ANIMATION_TIME
 import com.katyrin.loan_online.utils.setRotateImage
-import com.katyrin.loan_online.viewmodel.splash.SplashViewModel
-import com.katyrin.loan_online.viewmodel.splash.TokenState
+import com.katyrin.loan_online.viewmodel.SplashViewModel
 import javax.inject.Inject
 
 class SplashActivity : AppCompatActivity() {
@@ -41,12 +40,12 @@ class SplashActivity : AppCompatActivity() {
         )
     }
 
-    private fun renderData(state: TokenState) {
+    private fun renderData(state: Boolean) {
         when (state) {
-            TokenState.EMPTY -> {
+            false -> {
                 startActivity(Intent(this@SplashActivity, UnauthorizedActivity::class.java))
             }
-            TokenState.NO_EMPTY -> {
+            true -> {
                 startActivity(Intent(this@SplashActivity, AuthorizedActivity::class.java))
             }
         }

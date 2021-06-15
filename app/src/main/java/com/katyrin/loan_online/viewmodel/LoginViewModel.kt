@@ -1,18 +1,20 @@
-package com.katyrin.loan_online.viewmodel.login
+package com.katyrin.loan_online.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.katyrin.loan_online.data.model.User
 import com.katyrin.loan_online.data.repository.login.LoginRepository
-import com.katyrin.loan_online.utils.*
+import com.katyrin.loan_online.utils.FIVE_LETTERS
+import com.katyrin.loan_online.utils.QUARTER_SECOND
+import com.katyrin.loan_online.viewmodel.appstates.LoginFormState
+import com.katyrin.loan_online.viewmodel.appstates.RequestState
+import com.katyrin.loan_online.viewmodel.appstates.setErrorState
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.ResponseBody
-import retrofit2.HttpException
-import java.io.IOException
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -55,19 +57,8 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun setErrorServerState(throwable: Throwable) {
-        when (throwable) {
-            is IOException -> {
-                _requestState.value = RequestState.ClientError(INTERNET_ERROR)
-            }
-            is HttpException -> {
-                _requestState.value = getErrorType(throwable.code())
-            }
-        }
+        _requestState.setErrorState(throwable)
     }
-
-    private fun getErrorType(code: Int): RequestState<String> =
-        if (code.toString()[FIRST_CHAR] == CHAR_FIVE) RequestState.ServerError
-        else RequestState.ClientError(code)
 
     fun subscribeLoginDataChanged(textInput: Flowable<Pair<String, String>>) {
         disposable?.add(
@@ -95,10 +86,8 @@ class LoginViewModel @Inject constructor(
     }
 
     override fun onCleared() {
-        if (disposable != null) {
-            disposable?.clear()
-            disposable = null
-        }
+        disposable?.clear()
+        disposable = null
         super.onCleared()
     }
 }

@@ -11,11 +11,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.katyrin.loan_online.R
-import com.katyrin.loan_online.data.api.interceptor.SessionManager
+import com.katyrin.loan_online.SessionManager
 import com.katyrin.loan_online.databinding.FragmentDialogExitBinding
 import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
-import com.katyrin.loan_online.viewmodel.exit.DeleteDBState
-import com.katyrin.loan_online.viewmodel.exit.ExitViewModel
+import com.katyrin.loan_online.viewmodel.ExitViewModel
+import com.katyrin.loan_online.viewmodel.appstates.DeleteDBState
 import javax.inject.Inject
 
 class ExitDialog : BottomSheetDialogFragment() {

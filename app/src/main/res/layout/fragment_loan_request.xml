@@ -1,144 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.loanrequest.LoanRequestFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingStart="@dimen/margin_normal"
-        android:paddingEnd="@dimen/margin_normal">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/header_text_view"
-            style="@style/BaseTextStyle.Header.Normal"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/fill_out_the_application"
-            app:layout_constraintBottom_toTopOf="@id/percent_text_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/margin_normal"
+            android:paddingEnd="@dimen/margin_normal">
 
-        <TextView
-            android:id="@+id/percent_text_view"
-            style="@style/BaseTextStyle.NormalText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/text_percent_layout"
-            app:layout_constraintBottom_toTopOf="@id/period_text_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/header_text_view" />
-
-        <TextView
-            android:id="@+id/period_text_view"
-            style="@style/BaseTextStyle.NormalText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/text_period_layout"
-            app:layout_constraintBottom_toTopOf="@id/max_amount_text_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/percent_text_view" />
-
-        <TextView
-            android:id="@+id/max_amount_text_view"
-            style="@style/BaseTextStyle.Header.Min"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/text_amount_layout"
-            app:layout_constraintBottom_toTopOf="@id/max_amount_seek_bar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/period_text_view" />
-
-        <SeekBar
-            android:id="@+id/max_amount_seek_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_normal"
-            android:progress="1000"
-            app:layout_constraintBottom_toTopOf="@id/first_name_layout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/max_amount_text_view" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/first_name_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:layout_marginBottom="@dimen/margin_normal"
-            app:layout_constraintBottom_toTopOf="@id/last_name_layout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/max_amount_seek_bar">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/first_name_edit_text"
-                style="@style/PersonName"
+            <TextView
+                android:id="@+id/header_text_view"
+                style="@style/BaseTextStyle.Header.Normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/enter_first_name" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:text="@string/fill_out_the_application"
+                app:layout_constraintBottom_toTopOf="@id/percent_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/last_name_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:layout_marginBottom="@dimen/margin_normal"
-            app:layout_constraintBottom_toTopOf="@id/phone_number_layout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/first_name_layout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/last_name_edit_text"
-                style="@style/PersonName"
+            <TextView
+                android:id="@+id/percent_text_view"
+                style="@style/BaseTextStyle.NormalText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/enter_last_name" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:text="@string/text_percent_layout"
+                app:layout_constraintBottom_toTopOf="@id/period_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header_text_view" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/phone_number_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:layout_marginBottom="@dimen/margin_normal"
-            app:layout_constraintBottom_toTopOf="@id/send_request_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/last_name_layout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phone_number_edit_text"
-                style="@style/EndPhoneNumber"
+            <TextView
+                android:id="@+id/period_text_view"
+                style="@style/BaseTextStyle.NormalText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:text="@string/text_period_layout"
+                app:layout_constraintBottom_toTopOf="@id/max_amount_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/percent_text_view" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/send_request_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:layout_marginBottom="@dimen/margin_normal"
-            android:enabled="false"
-            android:text="@string/send_request"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/phone_number_layout" />
+            <TextView
+                android:id="@+id/max_amount_text_view"
+                style="@style/BaseTextStyle.Header.Min"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_amount_layout"
+                app:layout_constraintBottom_toTopOf="@id/max_amount_seek_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/period_text_view" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <SeekBar
+                android:id="@+id/max_amount_seek_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:progress="1000"
+                app:layout_constraintBottom_toTopOf="@id/first_name_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/max_amount_text_view" />
 
-</androidx.core.widget.NestedScrollView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/first_name_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginBottom="@dimen/margin_normal"
+                app:layout_constraintBottom_toTopOf="@id/last_name_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/max_amount_seek_bar">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/first_name_edit_text"
+                    style="@style/PersonName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enter_first_name" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/last_name_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginBottom="@dimen/margin_normal"
+                app:layout_constraintBottom_toTopOf="@id/phone_number_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/first_name_layout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/last_name_edit_text"
+                    style="@style/PersonName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enter_last_name" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phone_number_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginBottom="@dimen/margin_normal"
+                app:layout_constraintBottom_toTopOf="@id/send_request_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/last_name_layout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phone_number_edit_text"
+                    style="@style/EndPhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/send_request_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:enabled="false"
+                android:text="@string/send_request"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phone_number_layout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</FrameLayout>

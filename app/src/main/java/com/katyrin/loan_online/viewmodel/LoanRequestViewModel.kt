@@ -1,4 +1,4 @@
-package com.katyrin.loan_online.viewmodel.loanrequest
+package com.katyrin.loan_online.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,6 +8,9 @@ import com.katyrin.loan_online.data.model.LoanRequest
 import com.katyrin.loan_online.data.repository.loanrequest.LoanRequestRepository
 import com.katyrin.loan_online.utils.MINIMUM_PHONE_NUMBER
 import com.katyrin.loan_online.utils.QUARTER_SECOND
+import com.katyrin.loan_online.viewmodel.appstates.ImportantDataState
+import com.katyrin.loan_online.viewmodel.appstates.RequestState
+import com.katyrin.loan_online.viewmodel.appstates.setErrorState
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -24,24 +27,25 @@ class LoanRequestViewModel @Inject constructor(
     private val _dataForm = MutableLiveData<ImportantDataState>()
     val dataFormState: LiveData<ImportantDataState> = _dataForm
 
-    private val _loanRequestState = MutableLiveData<LoanRequestState>()
-    val loanRequestState: LiveData<LoanRequestState> = _loanRequestState
+    private val _requestState = MutableLiveData<RequestState<LoanDTO>>()
+    val requestState: LiveData<RequestState<LoanDTO>> = _requestState
 
     fun sendRequest(loanRequest: LoanRequest) {
+        _requestState.value = RequestState.Loading
         disposable?.add(
             loanRequestRepository
                 .postLoansRequest(loanRequest)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(::successState) { setErrorStateServer() }
+                .subscribe(::successState, ::setErrorStateServer)
         )
     }
 
     private fun successState(loanDTO: LoanDTO) {
-        _loanRequestState.value = LoanRequestState.Success(loanDTO)
+        _requestState.value = RequestState.Success(loanDTO)
     }
 
-    private fun setErrorStateServer() {
-        _loanRequestState.value = LoanRequestState.Error
+    private fun setErrorStateServer(throwable: Throwable) {
+        _requestState.setErrorState(throwable)
     }
 
     fun subscribeImportantDataChanged(textInput: Flowable<Triple<String, String, String>>) {
@@ -74,10 +78,8 @@ class LoanRequestViewModel @Inject constructor(
     }
 
     override fun onCleared() {
-        if (disposable != null) {
-            disposable?.clear()
-            disposable = null
-        }
+        disposable?.clear()
+        disposable = null
         super.onCleared()
     }
 }

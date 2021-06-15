@@ -1,9 +1,10 @@
-package com.katyrin.loan_online.viewmodel.exit
+package com.katyrin.loan_online.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.katyrin.loan_online.data.repository.exit.ExitRepository
+import com.katyrin.loan_online.viewmodel.appstates.DeleteDBState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -35,10 +36,8 @@ class ExitViewModel @Inject constructor(
     }
 
     override fun onCleared() {
-        if (disposable != null) {
-            disposable?.clear()
-            disposable = null
-        }
+        disposable?.clear()
+        disposable = null
         super.onCleared()
     }
 }

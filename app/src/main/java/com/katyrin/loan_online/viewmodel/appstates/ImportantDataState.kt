@@ -1,4 +1,4 @@
-package com.katyrin.loan_online.viewmodel.loanrequest
+package com.katyrin.loan_online.viewmodel.appstates
 
 sealed class ImportantDataState {
     object ErrorFirstName : ImportantDataState()
