@@ -18,11 +18,11 @@ class LoansViewModel @Inject constructor(
     val loansRequestState: LiveData<LoansRequestState> = _loansRequestState
     private var disposable: CompositeDisposable? = CompositeDisposable()
 
-    fun getLoans(token: String) {
+    fun getLoans() {
         _loansRequestState.value = LoansRequestState.Loading
         disposable?.add(
             loansRepository
-                .getLoans(token)
+                .getLoans()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(::successState) { setErrorStateServer() }

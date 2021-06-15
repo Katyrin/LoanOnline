@@ -9,7 +9,7 @@ class LoansDataSourceImpl @Inject constructor(
     private val api: Api
 ) : LoansDataSource {
 
-    override fun getLoans(token: String): Single<List<LoanDTO>> = api.getLoans(token)
+    override fun getLoans(): Single<List<LoanDTO>> = api.getLoans()
 
-    override fun getLoanById(token: String, id: Int): Single<LoanDTO> = api.getLoanById(token, id)
+    override fun getLoanById(id: Int): Single<LoanDTO> = api.getLoanById(id)
 }

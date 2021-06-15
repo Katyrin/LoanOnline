@@ -11,8 +11,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.katyrin.loan_online.App
-import com.katyrin.loan_online.Prefs
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.data.model.LoanState
@@ -29,7 +27,6 @@ class LoanIdFragment : Fragment() {
     private val loanIdViewModel: LoanIdViewModel by viewModels(factoryProducer = { factory })
     private var binding: FragmentLoanIdBinding? = null
     private var id: Int? = null
-    private val prefs: Prefs by lazy { App.prefs!! }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -51,7 +48,7 @@ class LoanIdFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         loanIdViewModel.loanRequestState.observe(viewLifecycleOwner) { renderData(it) }
         loanIdViewModel.dateText.observe(viewLifecycleOwner) { setDateText(it) }
-        id?.let { loanIdViewModel.getLoanInfo(prefs.token, it) }
+        id?.let { loanIdViewModel.getLoanInfo(it) }
     }
 
     private fun renderData(state: LoanRequestState) {
@@ -114,14 +111,14 @@ class LoanIdFragment : Fragment() {
                 binding?.infoTextView?.isVisible = true
                 binding?.stateTextView?.text = getText(R.string.text_approved_state)
                 binding?.stateTextView?.setTextColor(
-                    ContextCompat.getColor(requireContext(),R.color.olivine)
+                    ContextCompat.getColor(requireContext(), R.color.olivine)
                 )
             }
             LoanState.REJECTED -> {
                 binding?.infoTextView?.isVisible = false
                 binding?.stateTextView?.text = getText(R.string.text_rejected_state)
                 binding?.stateTextView?.setTextColor(
-                    ContextCompat.getColor(requireContext(),R.color.rejected)
+                    ContextCompat.getColor(requireContext(), R.color.rejected)
                 )
             }
             LoanState.REGISTERED -> {

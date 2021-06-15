@@ -10,7 +10,7 @@ import javax.inject.Inject
 class LoanRequestDataSourceImpl @Inject constructor(
     private val api: Api
 ) : LoanRequestDataSource {
-    override fun postLoansRequest(token: String, loanRequest: LoanRequest): Single<LoanDTO> =
-        api.postLoansRequest(token, loanRequest)
+    override fun postLoansRequest(loanRequest: LoanRequest): Single<LoanDTO> =
+        api.postLoansRequest(loanRequest)
             .subscribeOn(Schedulers.io())
 }

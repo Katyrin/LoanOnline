@@ -23,18 +23,15 @@ class LoanIdViewModel @Inject constructor(
     private val _dateText = MutableLiveData<Pair<String, String>>()
     val dateText: LiveData<Pair<String, String>> = _dateText
 
-    fun getLoanInfo(token: String?, id: Int) {
+    fun getLoanInfo(id: Int) {
         _loanRequestState.value = LoanRequestState.Loading
-        val dispose = token?.let {
+        disposable?.add(
             loansRepository
-                .getLoanById(it, id)
+                .getLoanById(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(::successState) { setErrorStateServer() }
-        }
-        if (dispose != null) {
-            disposable?.add(dispose)
-        }
+        )
     }
 
     private fun successState(loan: LoanDTO) {

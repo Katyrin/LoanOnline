@@ -9,7 +9,7 @@ import javax.inject.Inject
 class LoanConditionsDataSourceImpl @Inject constructor(
     private val api: Api
 ) : LoanConditionsDataSource {
-    override fun getLoansCondition(token: String): Single<LoanConditionsDTO> =
-        api.getLoansCondition(token)
+    override fun getLoansCondition(): Single<LoanConditionsDTO> =
+        api.getLoansCondition()
             .subscribeOn(Schedulers.io())
 }

@@ -6,6 +6,7 @@ const val ROTATION_DURATION = 5000L
 const val ONE_ITEM = 1
 const val QUARTER_SECOND = 250L
 const val MINIMUM_PHONE_NUMBER = 11
+const val FIVE_LETTERS = 5
 
 const val BASE_URL = "http://103.23.208.205:8082/"
 const val DB_NAME = "database.db"
@@ -15,3 +16,5 @@ const val SHARED_PREFERENCES_TOKEN = "SHARED_PREFERENCES_TOKEN"
 const val SHARED_PREFERENCES_USERNAME = "SHARED_PREFERENCES_USERNAME"
 const val SHARED_PREFERENCES_PASSWORD = "SHARED_PREFERENCES_PASSWORD"
 const val LOAN_INFORMATION_NOT_FOUND = "Loan information not found"
+const val LETTER_T = "T"
+const val DOT = "."

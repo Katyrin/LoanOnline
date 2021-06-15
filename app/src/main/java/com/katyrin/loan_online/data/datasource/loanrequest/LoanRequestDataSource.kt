@@ -5,5 +5,5 @@ import com.katyrin.loan_online.data.model.LoanRequest
 import io.reactivex.Single
 
 interface LoanRequestDataSource {
-    fun postLoansRequest(token: String, loanRequest: LoanRequest): Single<LoanDTO>
+    fun postLoansRequest(loanRequest: LoanRequest): Single<LoanDTO>
 }

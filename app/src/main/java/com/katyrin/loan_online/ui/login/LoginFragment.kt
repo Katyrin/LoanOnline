@@ -12,9 +12,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.katyrin.loan_online.App
-import com.katyrin.loan_online.Prefs
 import com.katyrin.loan_online.R
+import com.katyrin.loan_online.data.api.interceptor.SessionManager
 import com.katyrin.loan_online.databinding.FragmentLoginBinding
 import com.katyrin.loan_online.ui.activities.AuthorizedActivity
 import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
@@ -33,7 +32,6 @@ class LoginFragment : Fragment() {
     lateinit var factory: ViewModelProvider.Factory
     private val loginViewModel: LoginViewModel by viewModels(factoryProducer = { factory })
     private var binding: FragmentLoginBinding? = null
-    private val prefs: Prefs by lazy { App.prefs!! }
     private val _textInput = BehaviorSubject.create<Pair<String, String>>()
     private val textInput = _textInput.toFlowable(BackpressureStrategy.LATEST)
 
@@ -152,9 +150,11 @@ class LoginFragment : Fragment() {
     }
 
     private fun saveData(token: String?, name: String?, password: String?) {
-        prefs.token = token
-        prefs.userName = name
-        prefs.password = password
+        SessionManager(requireContext()).saveAuthToken(
+            token.toString(),
+            name.toString(),
+            password.toString()
+        )
     }
 
     private fun replaceInfoViewPagerFragment() {
@@ -165,8 +165,9 @@ class LoginFragment : Fragment() {
     }
 
     private fun updateUiWithUser() {
-        val welcome = getString(R.string.welcome)
-        Toast.makeText(requireContext(), "$welcome ${prefs.userName}", Toast.LENGTH_LONG).show()
+        val welcome =
+            getString(R.string.welcome) + " ${SessionManager(requireContext()).fetchUserName()}"
+        Toast.makeText(requireContext(), welcome, Toast.LENGTH_LONG).show()
     }
 
     private fun showLoginFailed() {

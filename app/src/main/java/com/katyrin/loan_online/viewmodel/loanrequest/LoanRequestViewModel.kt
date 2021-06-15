@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.data.model.LoanRequest
 import com.katyrin.loan_online.data.repository.loanrequest.LoanRequestRepository
-import com.katyrin.loan_online.utils.QUARTER_SECOND
 import com.katyrin.loan_online.utils.MINIMUM_PHONE_NUMBER
+import com.katyrin.loan_online.utils.QUARTER_SECOND
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -27,16 +27,13 @@ class LoanRequestViewModel @Inject constructor(
     private val _loanRequestState = MutableLiveData<LoanRequestState>()
     val loanRequestState: LiveData<LoanRequestState> = _loanRequestState
 
-    fun sendRequest(token: String?, loanRequest: LoanRequest) {
-        val dispose = token?.let {
+    fun sendRequest(loanRequest: LoanRequest) {
+        disposable?.add(
             loanRequestRepository
-                .postLoansRequest(it, loanRequest)
+                .postLoansRequest(loanRequest)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(::successState) { setErrorStateServer() }
-        }
-        if (dispose != null) {
-            disposable?.add(dispose)
-        }
+        )
     }
 
     private fun successState(loanDTO: LoanDTO) {

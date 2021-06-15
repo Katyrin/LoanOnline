@@ -8,6 +8,6 @@ import javax.inject.Inject
 class LoanConditionsRepositoryImpl @Inject constructor(
     private val loanConditionsDataSource: LoanConditionsDataSource
 ) : LoanConditionsRepository {
-    override fun getLoansCondition(token: String): Single<LoanConditionsDTO> =
-        loanConditionsDataSource.getLoansCondition(token)
+    override fun getLoansCondition(): Single<LoanConditionsDTO> =
+        loanConditionsDataSource.getLoansCondition()
 }

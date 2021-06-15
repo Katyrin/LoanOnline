@@ -10,8 +10,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.katyrin.loan_online.App
-import com.katyrin.loan_online.Prefs
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.data.model.LoanConditionsDTO
 import com.katyrin.loan_online.databinding.FragmentLoanConditionsBinding
@@ -27,7 +25,6 @@ class LoanConditionsFragment : Fragment() {
     lateinit var factory: ViewModelProvider.Factory
     private val loanConditionsViewModel: LoanConditionsViewModel by viewModels(factoryProducer = { factory })
     private var binding: FragmentLoanConditionsBinding? = null
-    private val prefs: Prefs by lazy { App.prefs!! }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -45,7 +42,7 @@ class LoanConditionsFragment : Fragment() {
         loanConditionsViewModel.loanConditionsState.observe(viewLifecycleOwner) {
             handleRequestResult(it)
         }
-        prefs.token?.let { loanConditionsViewModel.getLoanConditions(it) }
+        loanConditionsViewModel.getLoanConditions()
     }
 
     private fun setButtonClick(loanConditionsDTO: LoanConditionsDTO) {

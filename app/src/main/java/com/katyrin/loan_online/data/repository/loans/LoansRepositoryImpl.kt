@@ -14,33 +14,33 @@ class LoansRepositoryImpl @Inject constructor(
     private val cashLoansDataSource: CacheLoansDataSource
 ) : LoansRepository {
 
-    override fun getLoans(token: String): Single<List<LoanDTO>> =
+    override fun getLoans(): Single<List<LoanDTO>> =
         networkStateRepository
             .isOnlineSingle()
-            .flatMap { isOnline -> getLoansIsOnline(isOnline, token) }
+            .flatMap(::getLoansIsOnline)
             .subscribeOn(Schedulers.io())
 
-    private fun getLoansIsOnline(isOnline: Boolean, token: String): Single<List<LoanDTO>> =
+    private fun getLoansIsOnline(isOnline: Boolean): Single<List<LoanDTO>> =
         if (isOnline) {
             loansDataSource
-                .getLoans(token)
+                .getLoans()
                 .flatMap(cashLoansDataSource::putLoans)
         } else {
-            cashLoansDataSource.getLoans(token)
+            cashLoansDataSource.getLoans()
         }
 
-    override fun getLoanById(token: String, id: Int): Single<LoanDTO> =
+    override fun getLoanById(id: Int): Single<LoanDTO> =
         networkStateRepository
             .isOnlineSingle()
-            .flatMap { isOnline -> getLoanByIdIsOnline(isOnline, token, id) }
+            .flatMap { isOnline -> getLoanByIdIsOnline(isOnline, id) }
             .subscribeOn(Schedulers.io())
 
-    private fun getLoanByIdIsOnline(isOnline: Boolean, token: String, id: Int): Single<LoanDTO> =
+    private fun getLoanByIdIsOnline(isOnline: Boolean, id: Int): Single<LoanDTO> =
         if (isOnline) {
             loansDataSource
-                .getLoanById(token, id)
+                .getLoanById(id)
                 .flatMap(cashLoansDataSource::putLoanById)
         } else {
-            cashLoansDataSource.getLoanById(token, id)
+            cashLoansDataSource.getLoanById(id)
         }
 }

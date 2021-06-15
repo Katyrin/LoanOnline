@@ -10,8 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.katyrin.loan_online.App
-import com.katyrin.loan_online.Prefs
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.data.model.LoanRequest
@@ -32,7 +30,6 @@ class LoanRequestFragment : Fragment() {
     lateinit var factory: ViewModelProvider.Factory
     private val loanRequestViewModel: LoanRequestViewModel by viewModels(factoryProducer = { factory })
     private var binding: FragmentLoanRequestBinding? = null
-    private val prefs: Prefs by lazy { App.prefs!! }
 
     private val _textInput = BehaviorSubject.create<Triple<String, String, String>>()
     private val textInput = _textInput.toFlowable(BackpressureStrategy.LATEST)
@@ -162,7 +159,7 @@ class LoanRequestFragment : Fragment() {
 
     private fun sendLoanRequest() {
         if (binding?.sendRequestButton?.isEnabled == true) {
-            loanRequestViewModel.sendRequest(prefs.token, getLoanRequestEntity())
+            loanRequestViewModel.sendRequest(getLoanRequestEntity())
         }
     }
 

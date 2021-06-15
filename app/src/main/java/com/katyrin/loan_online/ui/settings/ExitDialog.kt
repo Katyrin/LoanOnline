@@ -10,9 +10,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.katyrin.loan_online.App
-import com.katyrin.loan_online.Prefs
 import com.katyrin.loan_online.R
+import com.katyrin.loan_online.data.api.interceptor.SessionManager
 import com.katyrin.loan_online.databinding.FragmentDialogExitBinding
 import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
 import com.katyrin.loan_online.viewmodel.exit.DeleteDBState
@@ -25,7 +24,6 @@ class ExitDialog : BottomSheetDialogFragment() {
     lateinit var factory: ViewModelProvider.Factory
     private val exitViewModel: ExitViewModel by viewModels(factoryProducer = { factory })
     private var binding: FragmentDialogExitBinding? = null
-    private val prefs: Prefs by lazy { App.prefs!! }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -55,21 +53,20 @@ class ExitDialog : BottomSheetDialogFragment() {
     }
 
     private fun renderData(state: DeleteDBState) {
-        when(state) {
+        when (state) {
             DeleteDBState.SUCCESS -> {
                 clearPrefs()
                 requireActivity().finish()
             }
             DeleteDBState.ERROR -> {
-                Toast.makeText(requireContext(), R.string.data_not_deleted, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.data_not_deleted, Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
 
     private fun clearPrefs() {
-        prefs.token = null
-        prefs.userName = null
-        prefs.password = null
+        SessionManager(requireContext()).saveAuthToken(null, null, null)
     }
 
     override fun onDetach() {

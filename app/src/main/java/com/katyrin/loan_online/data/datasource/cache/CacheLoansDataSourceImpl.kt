@@ -15,12 +15,12 @@ class CacheLoansDataSourceImpl @Inject constructor(
 
     private val loansDao: LoansDao = database.loansDao()
 
-    override fun getLoans(token: String): Single<List<LoanDTO>> =
+    override fun getLoans(): Single<List<LoanDTO>> =
         loansDao
             .getLoans()
             .map(::convertLoanEntitiesToLoansDTO)
 
-    override fun getLoanById(token: String, id: Int): Single<LoanDTO> =
+    override fun getLoanById(id: Int): Single<LoanDTO> =
         loansDao
             .getLoanById(id)
             .onErrorResumeNext(Single.error(RuntimeException(LOAN_INFORMATION_NOT_FOUND)))
@@ -29,12 +29,12 @@ class CacheLoansDataSourceImpl @Inject constructor(
     override fun putLoans(loans: List<LoanDTO>): Single<List<LoanDTO>> =
         loansDao
             .putLoans(loans.map { convertLoanDTOToLoanEntity(it) })
-            .andThen(getLoans(""))
+            .andThen(getLoans())
 
     override fun putLoanById(loan: LoanDTO): Single<LoanDTO> =
         loansDao
             .putLoanById(convertLoanDTOToLoanEntity(loan))
-            .andThen(getLoanById("", loan.id))
+            .andThen(getLoanById(loan.id))
 
 
     private fun convertLoanEntitiesToLoansDTO(loanEntities: List<LoanEntity>): List<LoanDTO> =

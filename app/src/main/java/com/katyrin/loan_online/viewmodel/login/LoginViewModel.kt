@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.katyrin.loan_online.data.model.User
 import com.katyrin.loan_online.data.repository.login.LoginRepository
+import com.katyrin.loan_online.utils.FIVE_LETTERS
 import com.katyrin.loan_online.utils.QUARTER_SECOND
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -88,7 +89,7 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun isFieldValid(field: String): Boolean {
-        return field.length > 5
+        return field.length > FIVE_LETTERS
     }
 
     override fun onCleared() {

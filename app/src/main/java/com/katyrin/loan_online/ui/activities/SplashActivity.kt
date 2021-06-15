@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.katyrin.loan_online.App
-import com.katyrin.loan_online.Prefs
+import com.katyrin.loan_online.data.api.interceptor.SessionManager
 import com.katyrin.loan_online.databinding.ActivitySplashBinding
 import com.katyrin.loan_online.utils.SPLASH_ACTIVITY_ANIMATION_TIME
 import com.katyrin.loan_online.utils.setRotateImage
@@ -23,7 +23,6 @@ class SplashActivity : AppCompatActivity() {
     private val splashViewModel: SplashViewModel by viewModels(factoryProducer = { factory })
     private var binding: ActivitySplashBinding? = null
     private var handler = Handler(Looper.getMainLooper())
-    private val prefs: Prefs by lazy { App.prefs!! }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as App).appComponent.inject(this)
@@ -37,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
     private fun startAnimation() {
         binding?.imageView?.setRotateImage()
         handler.postDelayed(
-            { splashViewModel.checkToken(prefs.token) },
+            { splashViewModel.checkToken(SessionManager(this).fetchAuthToken()) },
             SPLASH_ACTIVITY_ANIMATION_TIME
         )
     }

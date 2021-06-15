@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -23,88 +23,88 @@
                 style="@style/BaseTextStyle.Header.Normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/detailed_information_from"
                 app:layout_constraintBottom_toTopOf="@id/first_name_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/detailed_information_from" />
 
             <TextView
                 android:id="@+id/first_name_text_view"
                 style="@style/BaseTextStyle.NormalText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/borrower_name"
                 app:layout_constraintBottom_toTopOf="@id/last_name_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/date_text_view" />
+                app:layout_constraintTop_toBottomOf="@id/date_text_view"
+                tools:text="@string/borrower_name" />
 
             <TextView
                 android:id="@+id/last_name_text_view"
                 style="@style/BaseTextStyle.NormalText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/borrower_s_surname"
                 app:layout_constraintBottom_toTopOf="@id/amount_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/first_name_text_view" />
+                app:layout_constraintTop_toBottomOf="@id/first_name_text_view"
+                tools:text="@string/borrower_s_surname" />
 
             <TextView
                 android:id="@+id/amount_text_view"
                 style="@style/BaseTextStyle.NormalText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/text_amount"
                 app:layout_constraintBottom_toTopOf="@id/percent_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/last_name_text_view" />
+                app:layout_constraintTop_toBottomOf="@id/last_name_text_view"
+                tools:text="@string/text_amount" />
 
             <TextView
                 android:id="@+id/percent_text_view"
                 style="@style/BaseTextStyle.NormalText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/text_percent"
                 app:layout_constraintBottom_toTopOf="@id/period_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/amount_text_view" />
+                app:layout_constraintTop_toBottomOf="@id/amount_text_view"
+                tools:text="@string/text_percent" />
 
             <TextView
                 android:id="@+id/period_text_view"
                 style="@style/BaseTextStyle.NormalText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/text_period"
                 app:layout_constraintBottom_toTopOf="@id/phone_number_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/percent_text_view" />
+                app:layout_constraintTop_toBottomOf="@id/percent_text_view"
+                tools:text="@string/text_period" />
 
             <TextView
                 android:id="@+id/phone_number_text_view"
                 style="@style/BaseTextStyle.NormalText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/phone_number"
                 app:layout_constraintBottom_toTopOf="@id/id_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/period_text_view" />
+                app:layout_constraintTop_toBottomOf="@id/period_text_view"
+                tools:text="@string/phone_number" />
 
             <TextView
                 android:id="@+id/id_text_view"
                 style="@style/BaseTextStyle.NormalText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/id"
                 app:layout_constraintBottom_toTopOf="@id/state_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/phone_number_text_view" />
+                app:layout_constraintTop_toBottomOf="@id/phone_number_text_view"
+                tools:text="@string/id" />
 
             <TextView
                 android:id="@+id/state_text_view"
@@ -122,22 +122,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/success_info"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/state_text_view" />
+                app:layout_constraintTop_toBottomOf="@id/state_text_view"
+                tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

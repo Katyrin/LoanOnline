@@ -12,13 +12,4 @@ class App : Application() {
             .appModule(AppModule(applicationContext))
             .build()
     }
-
-    override fun onCreate() {
-        super.onCreate()
-        prefs = Prefs(applicationContext)
-    }
-
-    companion object {
-        var prefs: Prefs? = null
-    }
 }

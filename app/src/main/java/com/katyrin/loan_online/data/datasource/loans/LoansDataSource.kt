@@ -4,6 +4,6 @@ import com.katyrin.loan_online.data.model.LoanDTO
 import io.reactivex.Single
 
 interface LoansDataSource {
-    fun getLoans(token: String): Single<List<LoanDTO>>
-    fun getLoanById(token: String, id: Int): Single<LoanDTO>
+    fun getLoans(): Single<List<LoanDTO>>
+    fun getLoanById(id: Int): Single<LoanDTO>
 }
