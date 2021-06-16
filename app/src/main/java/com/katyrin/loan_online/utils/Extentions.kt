@@ -38,21 +38,11 @@ fun FragmentManager.findFragment(position: BottomNavigationPosition): Fragment {
 
 fun Context.showErrorMessage(code: Int) {
     when (code) {
-        ERROR_400 -> {
-            toast(getString(R.string.exist_user))
-        }
-        ERROR_401 -> {
-            toast(getString(R.string.user_unauthorized))
-        }
-        ERROR_403 -> {
-            toast(getString(R.string.access_denied))
-        }
-        ERROR_404 -> {
-            toast(getString(R.string.user_not_found))
-        }
-        else -> {
-            toast(getString(R.string.unknown_error))
-        }
+        ERROR_400 -> toast(getString(R.string.exist_user))
+        ERROR_401 -> toast(getString(R.string.user_unauthorized))
+        ERROR_403 -> toast(getString(R.string.access_denied))
+        ERROR_404 -> toast(getString(R.string.user_not_found))
+        else -> toast(getString(R.string.internet_error))
     }
 }
 

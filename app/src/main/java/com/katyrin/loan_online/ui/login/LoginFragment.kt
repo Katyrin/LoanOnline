@@ -76,15 +76,27 @@ class LoginFragment : Fragment() {
         binding?.registrationButton?.setOnClickListener { startRegistration() }
         binding?.loginButton?.setOnClickListener { startLogin() }
         binding?.registeredButton?.setOnClickListener {
-            binding?.registeredButton?.isVisible = false
-            binding?.noRegisteredButton?.isVisible = true
+            registrationState()
             SessionManager(requireContext()).saveIsRegistered(true)
         }
         binding?.noRegisteredButton?.setOnClickListener {
-            binding?.registeredButton?.isVisible = true
-            binding?.noRegisteredButton?.isVisible = false
+            loginState()
             SessionManager(requireContext()).saveIsRegistered(false)
         }
+    }
+
+    private fun registrationState() {
+        binding?.registeredButton?.isVisible = false
+        binding?.registrationButton?.isVisible = false
+        binding?.noRegisteredButton?.isVisible = true
+        binding?.loginButton?.isVisible = true
+    }
+
+    private fun loginState() {
+        binding?.registeredButton?.isVisible = true
+        binding?.registrationButton?.isVisible = true
+        binding?.noRegisteredButton?.isVisible = false
+        binding?.loginButton?.isVisible = false
     }
 
     private fun onNextTextInput() {
@@ -160,12 +172,12 @@ class LoginFragment : Fragment() {
         binding?.apply {
             usernameLayout.isVisible = true
             passwordLayout.isVisible = true
-            registeredButton.isVisible = true
-            noRegisteredButton.isVisible = true
-            registrationButton.isVisible = true
-            loginButton.isVisible = true
             progressBar.isVisible = false
         }
+        if (!SessionManager(requireContext()).getIisRegistered())
+            loginState()
+        else
+            registrationState()
     }
 
     private fun setSuccessState(token: String) {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Loan-Online</string>
+    <string name="app_name">Loan Online</string>
 
     <string name="prompt_login">Login</string>
     <string name="prompt_password">Password</string>
@@ -15,9 +15,9 @@
     <string name="login_failed">"Login failed"</string>
     <string name="loan_request_failed">"Loan request failed"</string>
     <string name="loan_conditions_request_failed">"Loan conditions request failed"</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login" translatable="false">LoginActivity</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="try_button_text">Try</string>
     <string name="fill_out_the_application">Fill out the application</string>
     <string name="enter_the_amount">Enter the amount</string>
@@ -28,7 +28,7 @@
 
     <string name="text_percent_layout">Annual Percentage: 0.0 %</string>
     <string name="text_percent">Annual Percentage:</string>
-    <string name="percent_symbol">%</string>
+    <string name="percent_symbol" translatable="false">%</string>
 
     <string name="text_period_layout">Period in days: 0</string>
     <string name="text_period">Period in days:</string>
@@ -36,10 +36,10 @@
     <string name="text_amount_layout">Amount: 0</string>
     <string name="text_amount">Amount:</string>
 
-    <string name="invalid_first_name">Not a valid First Name</string>
-    <string name="invalid_last_name">Not a valid Last Name</string>
+    <string name="invalid_first_name">" The name field must not be empty"</string>
+    <string name="invalid_last_name">" The last name field must not be empty"</string>
     <string name="invalid_phone_number">Not a valid phone number</string>
-    <string name="ok">OK</string>
+    <string name="ok" translatable="false">OK</string>
     <string name="loan_terms_text">At the moment, the loan is available on the terms</string>
     <string name="max_amount">Max amount:</string>
     <string name="i_m_agree">I\'m agree</string>
@@ -49,7 +49,7 @@
 
     <!-- Preference-->
     <string name="language">Language</string>
-    <string name="theme">Set theme</string>
+    <string name="theme">Theme settings</string>
     <string name="log_out">Log out</string>
     <string name="click_to_exit">Click to exit</string>
     <string name="settings_reset">All settings will be reset</string>
@@ -57,10 +57,10 @@
     <string name="switch_theme">Switch theme</string>
     <string name="attachment_summary_on">Dark theme included</string>
     <string name="attachment_summary_off">Light theme included</string>
-    <string name="theme_key">theme key</string>
-    <string name="language_key">language key</string>
-    <string name="log_out_key">log out key</string>
-    <string name="dark_mode_def_value">MODE_NIGHT_FOLLOW_SYSTEM</string>
+    <string name="theme_key" translatable="false">theme key</string>
+    <string name="language_key" translatable="false">language key</string>
+    <string name="log_out_key" translatable="false">log out key</string>
+    <string name="dark_mode_def_value" translatable="false">MODE_NIGHT_FOLLOW_SYSTEM</string>
     <string name="dark_mode">Dark Mode</string>
 
     <string name="exit_message">Are you sure you want to log out of your account?</string>
@@ -78,12 +78,12 @@
     <string name="text_registered_state">Your loan application is being processed</string>
     <string name="success_info">* To receive money, contact any branch of our bank or contact us by phone to arrange a loan transfer to your card.</string>
     <string name="info_request">* Expect notification of loan approval soon, or you can check the information yourself on the home screen.</string>
-    <string name="id">Id:</string>
+    <string name="id" translatable="false">Id:</string>
 
     <string name="server_error">Internal server error. Try again after a while.</string>
     <string name="exist_user">A user with this login already exists. Give yourself a different username.</string>
     <string name="user_unauthorized">User authorization error. The system cannot find your username.</string>
     <string name="access_denied">Access to the resource is denied.</string>
     <string name="user_not_found">User not found. Check or correct your login details</string>
-    <string name="unknown_error">Unknown error</string>
+    <string name="internet_error">Internet error</string>
 </resources>
