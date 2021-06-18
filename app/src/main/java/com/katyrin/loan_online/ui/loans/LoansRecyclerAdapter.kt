@@ -7,20 +7,26 @@ import com.katyrin.loan_online.R
 import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.data.model.LoanState
 import com.katyrin.loan_online.databinding.ItemLoanBinding
+import com.katyrin.loan_online.utils.getDateText
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
+import io.reactivex.subjects.BehaviorSubject
 
-class LoansRecyclerAdapter(
-    private val onClick: (id: Int) -> Unit
-) : RecyclerView.Adapter<LoansRecyclerAdapter.ViewHolder>() {
+class LoansRecyclerAdapter: RecyclerView.Adapter<LoansRecyclerAdapter.ViewHolder>() {
+
+    private val _onClick = BehaviorSubject.create<Int>()
+    val onClick: Flowable<Int> = _onClick.toFlowable(BackpressureStrategy.LATEST)
 
     inner class ViewHolder(private val itemBinding: ItemLoanBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
+
         fun bind(loan: LoanDTO) {
             itemBinding.amountTextView.text = loan.amount.toString()
             val resId = getImageId(loan.state)
             itemBinding.loanStateImage.setImageResource(resId)
-            itemBinding.dateTextView.text = getDateText(loan.date)
+            itemBinding.dateTextView.text = loan.date.getDateText()
             itemBinding.root.setOnClickListener {
-                onClick(loan.id)
+                _onClick.onNext(loan.id)
             }
         }
 
@@ -30,8 +36,6 @@ class LoansRecyclerAdapter(
                 LoanState.REGISTERED -> R.drawable.ic_wait_money
                 LoanState.REJECTED -> R.drawable.ic_rejected
             }
-
-        private fun getDateText(text: String): String = text.split("T")[0]
     }
 
     private var loans: List<LoanDTO> = listOf()

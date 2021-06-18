@@ -9,11 +9,13 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.work.WorkManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.SessionManager
 import com.katyrin.loan_online.databinding.FragmentDialogExitBinding
 import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
+import com.katyrin.loan_online.utils.TAG_NOTIFY_WORK
 import com.katyrin.loan_online.viewmodel.ExitViewModel
 import com.katyrin.loan_online.viewmodel.appstates.DeleteDBState
 import javax.inject.Inject
@@ -55,6 +57,7 @@ class ExitDialog : BottomSheetDialogFragment() {
     private fun renderData(state: DeleteDBState) {
         when (state) {
             DeleteDBState.SUCCESS -> {
+                WorkManager.getInstance(requireContext()).cancelAllWorkByTag(TAG_NOTIFY_WORK)
                 clearPrefs()
                 requireActivity().finish()
             }

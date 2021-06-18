@@ -91,4 +91,7 @@
     <string name="view_pager_text_three">Next, you will be asked to fill out a simple form. On this screen, you must also select the amount you need up to which you have been approved. Upon successful completion of the form, you will be taken to a success screen.</string>
     <string name="view_pager_text_four">After filling out the application, you can see it on the main screen with its current status. Registered, rejected and approved. You can click on any of your applications to find out more information.</string>
     <string name="view_pager_text_five">It was a short briefing. You will now need to make your first application. Good luck!</string>
+    <string name="payment_notification">Payment notification</string>
+    <string name="notification_info">You have an unpaid loan from:</string>
+    <string name="several_loans_info">You have several outstanding loans that need to be paid. Number of loans:</string>
 </resources>

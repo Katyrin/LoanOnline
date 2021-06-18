@@ -49,3 +49,5 @@ fun Context.showErrorMessage(code: Int) {
 fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
+
+fun String.getDateText(): String = this.split(LETTER_T)[0]

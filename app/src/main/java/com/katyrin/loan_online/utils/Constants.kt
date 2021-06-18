@@ -13,6 +13,8 @@ const val ERROR_400 = 400
 const val ERROR_401 = 401
 const val ERROR_403 = 403
 const val ERROR_404 = 404
+const val DEFAULT_COUNT_LOANS = 1
+const val REGISTERED_LOAN = 1
 
 const val BASE_URL = "http://103.23.208.205:8082/"
 const val DB_NAME = "database.db"
@@ -22,6 +24,9 @@ const val SHARED_PREFERENCES_USERNAME = "SHARED_PREFERENCES_USERNAME"
 const val SHARED_PREFERENCES_PASSWORD = "SHARED_PREFERENCES_PASSWORD"
 const val LOAN_INFORMATION_NOT_FOUND = "Loan information not found"
 const val IS_REGISTERED = "IS_REGISTERED"
+const val NOTIFY_DATE = "NOTIFY_DATE"
+const val NOTIFY_LOANS = "NOTIFY_LOANS"
+const val TAG_NOTIFY_WORK = "TAG_NOTIFY_WORK"
 
 const val LETTER_T = "T"
 const val DOT = "."
