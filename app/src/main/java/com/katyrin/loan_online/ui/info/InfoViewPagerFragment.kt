@@ -53,9 +53,13 @@ class InfoViewPagerFragment : Fragment() {
 
 
     private fun postToList() {
-        for (i in 1..5) {
-            addToList("$userName $i", R.drawable.ic_money)
-        }
+        val textOne =
+            getString(R.string.welcome) + " $userName\n" + getString(R.string.view_pager_text_one)
+        addToList(textOne, R.drawable.ic_coins_planet)
+        addToList(getString(R.string.view_pager_text_two), R.drawable.ic_offer)
+        addToList(getString(R.string.view_pager_text_three), R.drawable.ic_form)
+        addToList(getString(R.string.view_pager_text_four), R.drawable.ic_states)
+        addToList(getString(R.string.view_pager_text_five), R.drawable.ic_like)
     }
 
     override fun onDetach() {

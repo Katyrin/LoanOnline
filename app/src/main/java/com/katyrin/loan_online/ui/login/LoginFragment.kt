@@ -208,7 +208,10 @@ class LoginFragment : Fragment() {
     private fun replaceInfoViewPagerFragment() {
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, InfoViewPagerFragment.newInstance("Roman"))
+            .replace(
+                R.id.container,
+                InfoViewPagerFragment.newInstance(binding?.username?.text.toString())
+            )
             .commitNow()
     }
 

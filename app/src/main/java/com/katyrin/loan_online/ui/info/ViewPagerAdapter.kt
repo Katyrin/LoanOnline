@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.katyrin.loan_online.databinding.FragmentInfoBinding
+import com.katyrin.loan_online.databinding.ItemInfoBinding
 import com.katyrin.loan_online.utils.ONE_ITEM
 
 class ViewPagerAdapter(
@@ -13,7 +13,7 @@ class ViewPagerAdapter(
     private val onClick: () -> Unit
 ) : RecyclerView.Adapter<ViewPagerAdapter.ViewHolder>() {
 
-    inner class ViewHolder(private val itemBinding: FragmentInfoBinding) :
+    inner class ViewHolder(private val itemBinding: ItemInfoBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(position: Int) {
             itemBinding.infoText.text = texts[position]
@@ -27,7 +27,7 @@ class ViewPagerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val itemBinding = FragmentInfoBinding.inflate(layoutInflater, parent, false)
+        val itemBinding = ItemInfoBinding.inflate(layoutInflater, parent, false)
         return ViewHolder(itemBinding)
     }
 

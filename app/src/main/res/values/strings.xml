@@ -86,4 +86,9 @@
     <string name="access_denied">Access to the resource is denied.</string>
     <string name="user_not_found">User not found. Check or correct your login details</string>
     <string name="internet_error">Internet error</string>
+    <string name="view_pager_text_one">You have successfully registered. We suggest that you familiarize yourself with a short introduction instruction. Just scroll to the right.</string>
+    <string name="view_pager_text_two">New loan tab. You will be offered the current loan terms. If the conditions suit you, you can agree and proceed to the registration, or wait for the next applications and go later.</string>
+    <string name="view_pager_text_three">Next, you will be asked to fill out a simple form. On this screen, you must also select the amount you need up to which you have been approved. Upon successful completion of the form, you will be taken to a success screen.</string>
+    <string name="view_pager_text_four">After filling out the application, you can see it on the main screen with its current status. Registered, rejected and approved. You can click on any of your applications to find out more information.</string>
+    <string name="view_pager_text_five">It was a short briefing. You will now need to make your first application. Good luck!</string>
 </resources>

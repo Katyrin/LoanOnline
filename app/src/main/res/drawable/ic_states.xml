@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@drawable/ic_wait_money"
+        android:gravity="center"
+        android:right="700dp" />
+    <item
+        android:drawable="@drawable/ic_rejected"
+        android:gravity="center" />
+    <item
+        android:drawable="@drawable/ic_approved"
+        android:gravity="center"
+        android:left="700dp" />
+</layer-list>
