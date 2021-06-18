@@ -103,8 +103,8 @@ class LoansFragment : Fragment() {
             WorkManager.getInstance(requireContext()).cancelAllWorkByTag(TAG_NOTIFY_WORK)
 
         val firstNotRegistered = loans.size - REGISTERED_LOAN
-        if (firstNotRegistered > 1)
-            startNotification(firstNotRegistered, loans[1].date.getDateText())
+        if (firstNotRegistered > ZERO_REVIEWED_LOAN)
+            startNotification(firstNotRegistered, loans[FIRST_REVIEWED_LOAN].date.getDateText())
     }
 
     private fun startNotification(firstNotRegistered: Int, date: String) {

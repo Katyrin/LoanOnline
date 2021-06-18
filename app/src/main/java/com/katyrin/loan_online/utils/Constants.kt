@@ -15,6 +15,8 @@ const val ERROR_403 = 403
 const val ERROR_404 = 404
 const val DEFAULT_COUNT_LOANS = 1
 const val REGISTERED_LOAN = 1
+const val FIRST_REVIEWED_LOAN = 1
+const val ZERO_REVIEWED_LOAN = 0
 
 const val BASE_URL = "http://103.23.208.205:8082/"
 const val DB_NAME = "database.db"

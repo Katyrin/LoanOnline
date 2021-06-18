@@ -31,7 +31,7 @@ class NotificationWorker @Inject constructor(
         }
 
     private fun getNotificationMessage(loans: Int): String =
-        if (loans > 1) {
+        if (loans > SINGLE_LOAN) {
             context.getString(R.string.several_loans_info) + " $loans"
         } else {
             context.getString(R.string.notification_info) + " ${inputData.getString(NOTIFY_DATE)}"
@@ -73,5 +73,6 @@ class NotificationWorker @Inject constructor(
     companion object {
         private const val CHANNEL_ID = "Notification channel"
         private const val NOTIFICATION_ID = 24
+        private const val SINGLE_LOAN = 1
     }
 }
