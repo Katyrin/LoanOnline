@@ -31,7 +31,7 @@
 
                 <data
                     android:host="www.loan-online-katyrin.com"
-                    android:scheme="app" />
+                    android:scheme="http" />
             </intent-filter>
         </activity>
         <activity android:name=".ui.activities.AuthorizedActivity" />
