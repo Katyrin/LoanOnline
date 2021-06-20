@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.work.WorkManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.katyrin.loan_online.R
-import com.katyrin.loan_online.SessionManager
 import com.katyrin.loan_online.databinding.FragmentDialogExitBinding
 import com.katyrin.loan_online.ui.activities.MainActivity
 import com.katyrin.loan_online.utils.TAG_NOTIFY_WORK
@@ -58,20 +57,12 @@ class ExitDialog : BottomSheetDialogFragment() {
         when (state) {
             DeleteDBState.SUCCESS -> {
                 WorkManager.getInstance(requireContext()).cancelAllWorkByTag(TAG_NOTIFY_WORK)
-                clearPrefs()
                 requireActivity().finish()
             }
             DeleteDBState.ERROR -> {
                 Toast.makeText(requireContext(), R.string.data_not_deleted, Toast.LENGTH_SHORT)
                     .show()
             }
-        }
-    }
-
-    private fun clearPrefs() {
-        SessionManager(requireContext()).apply {
-            saveAuthToken(null, null, null)
-            saveIsRegistered(false)
         }
     }
 

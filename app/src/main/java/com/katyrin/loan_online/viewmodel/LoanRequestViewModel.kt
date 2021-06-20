@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.data.model.LoanRequest
 import com.katyrin.loan_online.data.repository.loanrequest.LoanRequestRepository
-import com.katyrin.loan_online.utils.MINIMUM_PHONE_NUMBER
 import com.katyrin.loan_online.utils.QUARTER_SECOND
 import com.katyrin.loan_online.viewmodel.appstates.ImportantDataState
 import com.katyrin.loan_online.viewmodel.appstates.RequestState
@@ -81,5 +80,9 @@ class LoanRequestViewModel @Inject constructor(
         disposable?.clear()
         disposable = null
         super.onCleared()
+    }
+
+    private companion object {
+        const val MINIMUM_PHONE_NUMBER = 11
     }
 }

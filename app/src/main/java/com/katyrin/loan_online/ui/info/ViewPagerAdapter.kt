@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.katyrin.loan_online.databinding.ItemInfoBinding
-import com.katyrin.loan_online.utils.ONE_ITEM
 
 class ViewPagerAdapter(
     private val texts: List<String>,
@@ -33,5 +32,9 @@ class ViewPagerAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(position)
+    }
+
+    private companion object {
+        const val ONE_ITEM = 1
     }
 }

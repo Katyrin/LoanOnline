@@ -4,7 +4,6 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.katyrin.loan_online.data.api.Api
 import com.katyrin.loan_online.data.api.interceptor.HeaderInterceptor
-import com.katyrin.loan_online.utils.BASE_URL
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -19,6 +18,8 @@ import javax.inject.Singleton
 @Module
 interface ApiModule {
     companion object {
+
+        private const val BASE_URL = "http://103.23.208.205:8082/"
 
         @Provides
         @Singleton

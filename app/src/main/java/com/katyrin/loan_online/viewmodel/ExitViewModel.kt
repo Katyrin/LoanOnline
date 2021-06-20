@@ -7,7 +7,6 @@ import com.katyrin.loan_online.data.repository.exit.ExitRepository
 import com.katyrin.loan_online.viewmodel.appstates.DeleteDBState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class ExitViewModel @Inject constructor(
@@ -20,9 +19,8 @@ class ExitViewModel @Inject constructor(
 
     fun clearData() {
         disposable?.add(
-            exitRepository.deleteLoansTable()
+            exitRepository.clearAllData()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
                 .subscribe(::successDeleteData) { errorDeleteData() }
         )
     }

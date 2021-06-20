@@ -12,6 +12,8 @@ import com.katyrin.loan_online.data.repository.login.LoginRepository
 import com.katyrin.loan_online.data.repository.login.LoginRepositoryImpl
 import com.katyrin.loan_online.data.repository.network.NetworkStateRepository
 import com.katyrin.loan_online.data.repository.network.NetworkStateRepositoryImpl
+import com.katyrin.loan_online.data.repository.splash.SplashRepository
+import com.katyrin.loan_online.data.repository.splash.SplashRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -48,4 +50,8 @@ interface RepositoryModule {
     @Binds
     @Singleton
     fun exitRepository(exitRepositoryImpl: ExitRepositoryImpl): ExitRepository
+
+    @Binds
+    @Singleton
+    fun splashRepository(splashRepositoryImpl: SplashRepositoryImpl): SplashRepository
 }

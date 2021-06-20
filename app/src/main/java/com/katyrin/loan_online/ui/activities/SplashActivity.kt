@@ -8,10 +8,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.katyrin.loan_online.App
-import com.katyrin.loan_online.SessionManager
 import com.katyrin.loan_online.databinding.ActivitySplashBinding
 import com.katyrin.loan_online.utils.EXTRA_IS_AUTHORIZED
-import com.katyrin.loan_online.utils.SPLASH_ACTIVITY_ANIMATION_TIME
 import com.katyrin.loan_online.utils.setRotateImage
 import com.katyrin.loan_online.viewmodel.SplashViewModel
 import javax.inject.Inject
@@ -35,10 +33,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun startAnimation() {
         binding?.imageView?.setRotateImage()
-        handler.postDelayed(
-            { splashViewModel.checkToken(SessionManager(this).fetchAuthToken()) },
-            SPLASH_ACTIVITY_ANIMATION_TIME
-        )
+        handler.postDelayed({ splashViewModel.fetchAuthToken() }, SPLASH_ACTIVITY_ANIMATION_TIME)
     }
 
     private fun renderData(state: Boolean) {
@@ -55,5 +50,9 @@ class SplashActivity : AppCompatActivity() {
         binding = null
         handler.removeCallbacksAndMessages(null)
         super.onDestroy()
+    }
+
+    private companion object {
+        const val SPLASH_ACTIVITY_ANIMATION_TIME = 1000L
     }
 }

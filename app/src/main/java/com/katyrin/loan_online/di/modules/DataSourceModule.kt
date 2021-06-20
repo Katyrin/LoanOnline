@@ -12,6 +12,8 @@ import com.katyrin.loan_online.data.datasource.loans.LoansDataSource
 import com.katyrin.loan_online.data.datasource.loans.LoansDataSourceImpl
 import com.katyrin.loan_online.data.datasource.login.LoginDataSource
 import com.katyrin.loan_online.data.datasource.login.LoginDataSourceImpl
+import com.katyrin.loan_online.data.datasource.session.SessionManager
+import com.katyrin.loan_online.data.datasource.session.SessionManagerImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -48,4 +50,8 @@ interface DataSourceModule {
     @Binds
     @Singleton
     fun exitDataSource(exitDataSourceImpl: ExitDataSourceImpl): ExitDataSource
+
+    @Binds
+    @Singleton
+    fun sessionManager(sessionManagerImpl: SessionManagerImpl): SessionManager
 }

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.katyrin.loan_online.data.model.User
 import com.katyrin.loan_online.data.repository.login.LoginRepository
-import com.katyrin.loan_online.utils.FIVE_LETTERS
 import com.katyrin.loan_online.utils.QUARTER_SECOND
 import com.katyrin.loan_online.viewmodel.appstates.LoginFormState
 import com.katyrin.loan_online.viewmodel.appstates.RequestState
@@ -22,6 +21,12 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val loginRepository: LoginRepository
 ) : ViewModel() {
+
+    private val _saveDataState = MutableLiveData<Boolean>()
+    val saveDataState: LiveData<Boolean> = _saveDataState
+
+    private val _registeredState = MutableLiveData<Boolean>()
+    val registeredState: LiveData<Boolean> = _registeredState
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -72,12 +77,10 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun loginDataChanged(username: String, password: String) {
-        if (!isFieldValid(username)) {
-            _loginForm.value = LoginFormState.ErrorUserName
-        } else if (!isFieldValid(password)) {
-            _loginForm.value = LoginFormState.ErrorPassword
-        } else {
-            _loginForm.value = LoginFormState.Success
+        when {
+            !isFieldValid(username) -> _loginForm.value = LoginFormState.ErrorUserName
+            !isFieldValid(password) -> _loginForm.value = LoginFormState.ErrorPassword
+            else -> _loginForm.value = LoginFormState.Success
         }
     }
 
@@ -85,9 +88,26 @@ class LoginViewModel @Inject constructor(
         return field.length > FIVE_LETTERS
     }
 
+    fun saveIsRegistered(boolean: Boolean) {
+        loginRepository.saveIsRegistered(boolean)
+    }
+
+    fun getIsRegistered() {
+        _registeredState.value = loginRepository.getIsRegistered()
+    }
+
+    fun saveData(token: String) {
+        loginRepository.saveAuthToken(token)
+        _saveDataState.value = loginRepository.getIsRegistered()
+    }
+
     override fun onCleared() {
         disposable?.clear()
         disposable = null
         super.onCleared()
+    }
+
+    private companion object {
+        const val FIVE_LETTERS = 5
     }
 }

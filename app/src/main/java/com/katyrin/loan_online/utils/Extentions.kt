@@ -14,6 +14,13 @@ import com.katyrin.loan_online.ui.main.BottomNavigationPosition
 import com.katyrin.loan_online.ui.main.createFragment
 import com.katyrin.loan_online.ui.main.getTag
 
+private const val ROTATION_ANIMATED_AMOUNT = 1000f
+private const val ROTATION_DURATION = 5000L
+private const val ERROR_400 = 400
+private const val ERROR_401 = 401
+private const val ERROR_403 = 403
+private const val ERROR_404 = 404
+
 fun View.setRotateImage() {
     animate()
         .rotationBy(ROTATION_ANIMATED_AMOUNT)

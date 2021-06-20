@@ -8,7 +8,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.katyrin.loan_online.utils.DEFAULT_COUNT_LOANS
 import com.katyrin.loan_online.utils.NOTIFY_DATE
 import com.katyrin.loan_online.utils.NOTIFY_LOANS
 import javax.inject.Inject
@@ -70,9 +69,10 @@ class NotificationWorker @Inject constructor(
         notificationManager.createNotificationChannel(channel)
     }
 
-    companion object {
-        private const val CHANNEL_ID = "Notification channel"
-        private const val NOTIFICATION_ID = 24
-        private const val SINGLE_LOAN = 1
+    private companion object {
+        const val DEFAULT_COUNT_LOANS = 1
+        const val CHANNEL_ID = "Notification channel"
+        const val NOTIFICATION_ID = 24
+        const val SINGLE_LOAN = 1
     }
 }

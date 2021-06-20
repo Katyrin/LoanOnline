@@ -1,7 +1,6 @@
 package com.katyrin.loan_online.ui.login
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.katyrin.loan_online.R
-import com.katyrin.loan_online.SessionManager
 import com.katyrin.loan_online.databinding.FragmentLoginBinding
 import com.katyrin.loan_online.ui.activities.MainActivity
 import com.katyrin.loan_online.ui.info.InfoViewPagerFragment
+import com.katyrin.loan_online.ui.main.MainFragment
 import com.katyrin.loan_online.utils.afterTextChanged
 import com.katyrin.loan_online.utils.showErrorMessage
 import com.katyrin.loan_online.utils.toast
@@ -51,6 +50,8 @@ class LoginFragment : Fragment() {
 
         loginViewModel.loginFormState.observe(viewLifecycleOwner) { handleLoginState(it) }
         loginViewModel.requestState.observe(viewLifecycleOwner) { handleLoginResult(it) }
+        loginViewModel.registeredState.observe(viewLifecycleOwner) { setIsRegisteredState(it) }
+        loginViewModel.saveDataState.observe(viewLifecycleOwner) { openFragment(it) }
 
         loginViewModel.subscribeLoginDataChanged(textInput)
         initEditTextViews()
@@ -76,11 +77,11 @@ class LoginFragment : Fragment() {
         binding?.loginButton?.setOnClickListener { startLogin() }
         binding?.registeredButton?.setOnClickListener {
             registrationState()
-            SessionManager(requireContext()).saveIsRegistered(true)
+            loginViewModel.saveIsRegistered(true)
         }
         binding?.noRegisteredButton?.setOnClickListener {
             loginState()
-            SessionManager(requireContext()).saveIsRegistered(false)
+            loginViewModel.saveIsRegistered(false)
         }
     }
 
@@ -173,35 +174,29 @@ class LoginFragment : Fragment() {
             passwordLayout.isVisible = true
             progressBar.isVisible = false
         }
-        if (!SessionManager(requireContext()).getIisRegistered())
-            loginState()
-        else
-            registrationState()
+
+        loginViewModel.getIsRegistered()
+    }
+
+    private fun setIsRegisteredState(isRegistered: Boolean) {
+        if (isRegistered) registrationState()
+        else loginState()
     }
 
     private fun setSuccessState(token: String) {
-        if (!SessionManager(requireContext()).getIisRegistered()) {
-            successRegistrationRenderData(token)
-        } else {
-            successLoginRenderData(token)
-        }
-    }
-
-    private fun successRegistrationRenderData(token: String) {
-        saveData(token, binding?.username?.text.toString(), binding?.password?.text.toString())
         updateUiWithUser()
-        replaceInfoViewPagerFragment()
+        loginViewModel.saveData(token)
     }
 
-    private fun successLoginRenderData(token: String) {
-        saveData(token, binding?.username?.text.toString(), binding?.password?.text.toString())
-        updateUiWithUser()
-        startActivity(Intent(requireContext(), MainActivity::class.java))
-        requireActivity().finish()
+    private fun openFragment(isRegistered: Boolean) {
+        if (isRegistered) replaceMainFragment()
+        else replaceInfoViewPagerFragment()
     }
 
-    private fun saveData(token: String, name: String, password: String) {
-        SessionManager(requireContext()).saveAuthToken(token, name, password)
+    private fun replaceMainFragment() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, MainFragment.newInstance())
+            .commitNow()
     }
 
     private fun replaceInfoViewPagerFragment() {
@@ -216,7 +211,7 @@ class LoginFragment : Fragment() {
 
     private fun updateUiWithUser() {
         val welcome =
-            getString(R.string.welcome) + " ${SessionManager(requireContext()).fetchUserName()}"
+            getString(R.string.welcome) + " ${binding?.username?.text.toString()}"
         requireContext().toast(welcome)
     }
 

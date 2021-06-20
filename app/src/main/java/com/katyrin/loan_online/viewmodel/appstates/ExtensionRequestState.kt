@@ -1,11 +1,12 @@
 package com.katyrin.loan_online.viewmodel.appstates
 
 import androidx.lifecycle.MutableLiveData
-import com.katyrin.loan_online.utils.CHAR_FIVE
-import com.katyrin.loan_online.utils.FIRST_CHAR
-import com.katyrin.loan_online.utils.INTERNET_ERROR
 import retrofit2.HttpException
 import java.io.IOException
+
+private const val FIRST_CHAR = 0
+private const val INTERNET_ERROR = 0
+private const val CHAR_FIVE = '5'
 
 fun <T> MutableLiveData<RequestState<T>>.setErrorState(throwable: Throwable) {
     when (throwable) {

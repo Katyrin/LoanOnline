@@ -164,6 +164,9 @@ class LoansFragment : Fragment() {
     }
 
     companion object {
+        private const val ZERO_REVIEWED_LOAN = 0
+        private const val FIRST_REVIEWED_LOAN = 1
+        private const val REGISTERED_LOAN = 1
         private const val FIX_INTERVAL = 25L
         private const val REPEAT_INTERVAL = 30L
         const val TAG = "LoansFragment"
