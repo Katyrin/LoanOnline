@@ -10,7 +10,7 @@
     <string name="no_registration_text">Have no account</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_username">Login must be >5 characters</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="loan_request_failed">"Loan request failed"</string>

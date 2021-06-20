@@ -20,7 +20,7 @@
             <TextView
                 android:id="@+id/header_text_view"
                 style="@style/BaseTextStyle.Header.Normal"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/fill_out_the_application"
                 app:layout_constraintBottom_toTopOf="@id/percent_text_view"
@@ -31,7 +31,7 @@
             <TextView
                 android:id="@+id/percent_text_view"
                 style="@style/BaseTextStyle.NormalText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/text_percent_layout"
                 app:layout_constraintBottom_toTopOf="@id/period_text_view"
@@ -42,35 +42,37 @@
             <TextView
                 android:id="@+id/period_text_view"
                 style="@style/BaseTextStyle.NormalText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/text_period_layout"
-                app:layout_constraintBottom_toTopOf="@id/max_amount_text_view"
+                app:layout_constraintBottom_toTopOf="@id/amount_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/percent_text_view" />
 
             <TextView
-                android:id="@+id/max_amount_text_view"
+                android:id="@+id/amount_text_view"
                 style="@style/BaseTextStyle.Header.Min"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/text_amount_layout"
-                app:layout_constraintBottom_toTopOf="@id/max_amount_seek_bar"
+                app:layout_constraintBottom_toTopOf="@id/amount_slider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/period_text_view" />
 
-            <SeekBar
-                android:id="@+id/max_amount_seek_bar"
-                android:layout_width="match_parent"
+            <com.google.android.material.slider.Slider
+                android:id="@+id/amount_slider"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_normal"
-                android:progress="1000"
+                android:value="1000"
+                android:stepSize="500"
+                android:valueFrom="500"
                 app:layout_constraintBottom_toTopOf="@id/first_name_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/max_amount_text_view" />
+                app:layout_constraintTop_toBottomOf="@id/amount_text_view" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/first_name_layout"
@@ -82,7 +84,7 @@
                 app:layout_constraintBottom_toTopOf="@id/last_name_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/max_amount_seek_bar">
+                app:layout_constraintTop_toBottomOf="@id/amount_slider">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/first_name_edit_text"

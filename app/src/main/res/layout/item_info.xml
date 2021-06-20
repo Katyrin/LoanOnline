@@ -8,7 +8,7 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/info_image"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/info_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,7 +18,7 @@
     <TextView
         android:id="@+id/info_text"
         style="@style/BaseTextStyle.Header.Min"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/try_button"
         app:layout_constraintEnd_toEndOf="parent"

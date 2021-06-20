@@ -8,7 +8,7 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/indicator"
@@ -18,7 +18,7 @@
 
     <me.relex.circleindicator.CircleIndicator3
         android:id="@+id/indicator"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="@dimen/indicator_height"
         app:ci_drawable="@drawable/swipe_indicator_active"
         app:ci_drawable_unselected="@drawable/swipe_indicator_passive"

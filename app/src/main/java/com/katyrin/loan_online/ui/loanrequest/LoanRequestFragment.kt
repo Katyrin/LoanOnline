@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SeekBar
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -117,7 +116,7 @@ class LoanRequestFragment : Fragment() {
 
     private fun initViews() {
         setText()
-        setSeekBar()
+        setSlider()
         binding?.sendRequestButton?.setOnClickListener { sendLoanRequest() }
         binding?.firstNameEditText?.afterTextChanged { onNextTextInput() }
         binding?.lastNameEditText?.afterTextChanged { onNextTextInput() }
@@ -138,23 +137,19 @@ class LoanRequestFragment : Fragment() {
         binding?.periodTextView?.text = period
     }
 
-    private fun setSeekBar() {
-        binding?.maxAmountSeekBar?.apply {
-            max = maxAmount!!
-            setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(
-                    seekBar: SeekBar?,
-                    progress: Int,
-                    fromUser: Boolean
-                ) {
-                    val amount = "${getString(R.string.text_amount)} $progress"
-                    binding?.maxAmountTextView?.text = amount
-                }
-
-                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-                override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-            })
+    private fun setSlider() {
+        binding?.amountSlider?.apply {
+            setSliderText(value)
+            valueTo = maxAmount!!.toFloat()
+            addOnChangeListener { _, value, _ ->
+                setSliderText(value)
+            }
         }
+    }
+
+    private fun setSliderText(value: Float) {
+        val amount = "${getString(R.string.text_amount)} ${value.toInt()}"
+        binding?.amountTextView?.text = amount
     }
 
     private fun onNextTextInput() {
@@ -175,7 +170,7 @@ class LoanRequestFragment : Fragment() {
 
     private fun getLoanRequestEntity(): LoanRequest =
         LoanRequest(
-            binding?.maxAmountSeekBar?.progress,
+            binding?.amountSlider?.value?.toInt(),
             binding?.firstNameEditText?.text.toString(),
             binding?.lastNameEditText?.text.toString(),
             percent,

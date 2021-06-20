@@ -21,7 +21,7 @@
             <TextView
                 android:id="@+id/date_text_view"
                 style="@style/BaseTextStyle.Header.Normal"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/first_name_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
             <TextView
                 android:id="@+id/first_name_text_view"
                 style="@style/BaseTextStyle.NormalText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/last_name_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
             <TextView
                 android:id="@+id/last_name_text_view"
                 style="@style/BaseTextStyle.NormalText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/amount_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +54,7 @@
             <TextView
                 android:id="@+id/amount_text_view"
                 style="@style/BaseTextStyle.NormalText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/percent_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
             <TextView
                 android:id="@+id/percent_text_view"
                 style="@style/BaseTextStyle.NormalText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/period_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,7 @@
             <TextView
                 android:id="@+id/period_text_view"
                 style="@style/BaseTextStyle.NormalText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/phone_number_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +87,7 @@
             <TextView
                 android:id="@+id/phone_number_text_view"
                 style="@style/BaseTextStyle.NormalText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/id_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +98,7 @@
             <TextView
                 android:id="@+id/id_text_view"
                 style="@style/BaseTextStyle.NormalText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/state_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -109,7 +109,7 @@
             <TextView
                 android:id="@+id/state_text_view"
                 style="@style/BaseTextStyle.NormalText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/info_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
