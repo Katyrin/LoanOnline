@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?colorOnPrimary"
     tools:context=".ui.success.SuccessFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,8 +18,8 @@
             style="@style/BaseTextStyle.Header.Max"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/success"
             android:layout_margin="@dimen/margin_normal"
+            android:text="@string/success"
             android:textColor="@color/olivine"
             app:layout_constraintBottom_toTopOf="@id/date_text_view"
             app:layout_constraintEnd_toEndOf="parent"
@@ -138,8 +139,8 @@
             android:id="@+id/ok_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ok"
             android:layout_margin="@dimen/margin_normal"
+            android:text="@string/ok"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

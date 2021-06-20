@@ -13,7 +13,8 @@ import com.katyrin.loan_online.R
 import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.data.model.LoanRequest
 import com.katyrin.loan_online.databinding.FragmentLoanRequestBinding
-import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
+import com.katyrin.loan_online.ui.activities.BackButtonListener
+import com.katyrin.loan_online.ui.activities.MainActivity
 import com.katyrin.loan_online.ui.success.SuccessFragment
 import com.katyrin.loan_online.utils.afterTextChanged
 import com.katyrin.loan_online.utils.showErrorMessage
@@ -25,7 +26,7 @@ import io.reactivex.BackpressureStrategy
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
-class LoanRequestFragment : Fragment() {
+class LoanRequestFragment : Fragment(), BackButtonListener {
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
@@ -41,7 +42,7 @@ class LoanRequestFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as OnAppCompatActivity).appComponent?.inject(this)
+        (activity as MainActivity).appComponent?.inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,8 +94,8 @@ class LoanRequestFragment : Fragment() {
     private fun replaceSuccessFragment(loanDTO: LoanDTO) {
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, SuccessFragment.newInstance(loanDTO))
-            .commitNow()
+            .add(R.id.main_container, SuccessFragment.newInstance(loanDTO))
+            .commit()
     }
 
     private fun handleImportantDataState(state: ImportantDataState) {

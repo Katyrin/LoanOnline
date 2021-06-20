@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.databinding.FragmentInfoViewPagerBinding
+import com.katyrin.loan_online.ui.activities.BackButtonListener
 import com.katyrin.loan_online.ui.loanconditions.LoanConditionsFragment
 
 
-class InfoViewPagerFragment : Fragment() {
+class InfoViewPagerFragment : Fragment(), BackButtonListener {
 
     private var binding: FragmentInfoViewPagerBinding? = null
     private var userName: String? = null
@@ -42,7 +43,7 @@ class InfoViewPagerFragment : Fragment() {
     private fun replaceLoanConditionsFragment() {
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, LoanConditionsFragment.newInstance())
+            .replace(R.id.main_container, LoanConditionsFragment.newInstance())
             .commitNow()
     }
 

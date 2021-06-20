@@ -1,43 +1,42 @@
-package com.katyrin.loan_online.ui.activities
+package com.katyrin.loan_online.ui.main
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.katyrin.loan_online.App
 import com.katyrin.loan_online.R
-import com.katyrin.loan_online.databinding.ActivityAuthorizedBinding
-import com.katyrin.loan_online.di.AppComponent
+import com.katyrin.loan_online.databinding.FragmentMainBinding
 import com.katyrin.loan_online.utils.findFragment
-import java.util.*
 
-class AuthorizedActivity : AppCompatActivity(),
-    BottomNavigationView.OnNavigationItemSelectedListener, OnAppCompatActivity, OnHomeScreen {
+class MainFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedListener {
 
-    override var appComponent: AppComponent? = null
-    private var binding: ActivityAuthorizedBinding? = null
+    private var binding: FragmentMainBinding? = null
     private var navPosition: BottomNavigationPosition = BottomNavigationPosition.HOME
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        appComponent = (application as App).appComponent
-        super.onCreate(savedInstanceState)
-        binding = ActivityAuthorizedBinding.inflate(layoutInflater)
-        setContentView(binding?.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = FragmentMainBinding.inflate(inflater, container, false)
+        .also { binding = it }.root
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initBottomNavigation(savedInstanceState)
     }
 
     private fun initBottomNavigation(savedInstanceState: Bundle?) {
         binding?.bottomNavigation?.apply {
-            setOnNavigationItemSelectedListener(this@AuthorizedActivity)
+            setOnNavigationItemSelectedListener(this@MainFragment)
             if (savedInstanceState == null) selectedItemId = R.id.home
         }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean =
-        switchFragment(supportFragmentManager.findFragment(
+        switchFragment(childFragmentManager.findFragment(
             findNavigationPositionById(item.itemId).also { navPosition = it }
         ))
 
@@ -48,20 +47,21 @@ class AuthorizedActivity : AppCompatActivity(),
             detachFragment()
             checkIsDetachedFragment(fragment, navPosition.getTag())
             setTransitFragmentFade()
-            supportFragmentManager.executePendingTransactions()
+            childFragmentManager.executePendingTransactions()
             true
         }
 
     private fun removeAllStackFragments() {
-        for (fragment in supportFragmentManager.fragments) {
+        for (fragment in childFragmentManager.fragments) {
             if (fragment !is BottomNavigationView)
-                supportFragmentManager.beginTransaction().remove(fragment).commit()
+                childFragmentManager.beginTransaction().remove(fragment)
+                    .commit()
         }
     }
 
     private fun detachFragment() {
-        supportFragmentManager.findFragmentById(R.id.container)?.also {
-            supportFragmentManager.beginTransaction().detach(it).commit()
+        childFragmentManager.findFragmentById(R.id.main_container)?.also {
+            childFragmentManager.beginTransaction().detach(it).commit()
         }
     }
 
@@ -73,36 +73,32 @@ class AuthorizedActivity : AppCompatActivity(),
     }
 
     private fun attachFragment(fragment: Fragment) {
-        supportFragmentManager
+        childFragmentManager
             .beginTransaction()
             .attach(fragment)
             .commit()
     }
 
     private fun replaceFragment(fragment: Fragment, tag: String) {
-        supportFragmentManager
+        childFragmentManager
             .beginTransaction()
             .replace(R.id.container, fragment, tag)
             .commit()
     }
 
     private fun setTransitFragmentFade() {
-        supportFragmentManager
+        childFragmentManager
             .beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .commit()
     }
 
     override fun onDestroy() {
-        appComponent = null
         binding = null
         super.onDestroy()
     }
 
-    override fun onHomeScreen() {
-        binding?.bottomNavigation?.apply {
-            setOnNavigationItemSelectedListener(this@AuthorizedActivity)
-            selectedItemId = R.id.home
-        }
+    companion object {
+        fun newInstance() = MainFragment()
     }
 }

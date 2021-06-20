@@ -12,7 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.data.model.LoanConditionsDTO
 import com.katyrin.loan_online.databinding.FragmentLoanConditionsBinding
-import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
+import com.katyrin.loan_online.ui.activities.BackButtonListener
+import com.katyrin.loan_online.ui.activities.MainActivity
 import com.katyrin.loan_online.ui.loanrequest.LoanRequestFragment
 import com.katyrin.loan_online.utils.showErrorMessage
 import com.katyrin.loan_online.utils.toast
@@ -20,7 +21,7 @@ import com.katyrin.loan_online.viewmodel.LoanConditionsViewModel
 import com.katyrin.loan_online.viewmodel.appstates.RequestState
 import javax.inject.Inject
 
-class LoanConditionsFragment : Fragment() {
+class LoanConditionsFragment : Fragment(), BackButtonListener {
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
@@ -29,7 +30,7 @@ class LoanConditionsFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as OnAppCompatActivity).appComponent?.inject(this)
+        (activity as MainActivity).appComponent?.inject(this)
     }
 
     override fun onCreateView(
@@ -60,8 +61,8 @@ class LoanConditionsFragment : Fragment() {
     private fun replaceLoanRequestFragment(maxAmount: Int, percent: Double, period: Int) {
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, LoanRequestFragment.newInstance(maxAmount, percent, period))
-            .commitNow()
+            .replace(R.id.main_container, LoanRequestFragment.newInstance(maxAmount, percent, period))
+            .commit()
     }
 
     private fun handleRequestResult(state: RequestState<LoanConditionsDTO>) {

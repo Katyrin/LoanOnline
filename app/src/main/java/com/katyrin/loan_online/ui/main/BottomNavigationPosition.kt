@@ -1,4 +1,4 @@
-package com.katyrin.loan_online.ui.activities
+package com.katyrin.loan_online.ui.main
 
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.ui.loanconditions.LoanConditionsFragment

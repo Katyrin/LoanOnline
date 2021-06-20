@@ -10,9 +10,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.katyrin.loan_online.R
-import com.katyrin.loan_online.ui.activities.BottomNavigationPosition
-import com.katyrin.loan_online.ui.activities.createFragment
-import com.katyrin.loan_online.ui.activities.getTag
+import com.katyrin.loan_online.ui.main.BottomNavigationPosition
+import com.katyrin.loan_online.ui.main.createFragment
+import com.katyrin.loan_online.ui.main.getTag
 
 fun View.setRotateImage() {
     animate()

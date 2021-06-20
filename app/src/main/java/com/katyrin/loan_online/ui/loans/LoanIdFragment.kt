@@ -14,7 +14,7 @@ import com.katyrin.loan_online.R
 import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.data.model.LoanState
 import com.katyrin.loan_online.databinding.FragmentLoanIdBinding
-import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
+import com.katyrin.loan_online.ui.activities.MainActivity
 import com.katyrin.loan_online.utils.showErrorMessage
 import com.katyrin.loan_online.utils.toast
 import com.katyrin.loan_online.viewmodel.LoanIdViewModel
@@ -31,7 +31,7 @@ class LoanIdFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as OnAppCompatActivity).appComponent?.inject(this)
+        (activity as MainActivity).appComponent?.inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

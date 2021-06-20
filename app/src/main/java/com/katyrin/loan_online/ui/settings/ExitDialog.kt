@@ -14,7 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.SessionManager
 import com.katyrin.loan_online.databinding.FragmentDialogExitBinding
-import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
+import com.katyrin.loan_online.ui.activities.MainActivity
 import com.katyrin.loan_online.utils.TAG_NOTIFY_WORK
 import com.katyrin.loan_online.viewmodel.ExitViewModel
 import com.katyrin.loan_online.viewmodel.appstates.DeleteDBState
@@ -29,7 +29,7 @@ class ExitDialog : BottomSheetDialogFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as OnAppCompatActivity).appComponent?.inject(this)
+        (activity as MainActivity).appComponent?.inject(this)
     }
 
     override fun onCreateView(

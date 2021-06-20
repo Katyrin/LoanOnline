@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.katyrin.loan_online.App
 import com.katyrin.loan_online.SessionManager
 import com.katyrin.loan_online.databinding.ActivitySplashBinding
+import com.katyrin.loan_online.utils.EXTRA_IS_AUTHORIZED
 import com.katyrin.loan_online.utils.SPLASH_ACTIVITY_ANIMATION_TIME
 import com.katyrin.loan_online.utils.setRotateImage
 import com.katyrin.loan_online.viewmodel.SplashViewModel
@@ -41,14 +42,12 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun renderData(state: Boolean) {
+        val intent = Intent(this, MainActivity::class.java)
         when (state) {
-            false -> {
-                startActivity(Intent(this@SplashActivity, UnauthorizedActivity::class.java))
-            }
-            true -> {
-                startActivity(Intent(this@SplashActivity, AuthorizedActivity::class.java))
-            }
+            false -> intent.putExtra(EXTRA_IS_AUTHORIZED, false)
+            true -> intent.putExtra(EXTRA_IS_AUTHORIZED, true)
         }
+        startActivity(intent)
         finish()
     }
 

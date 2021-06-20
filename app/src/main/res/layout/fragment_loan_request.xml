@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?colorOnPrimary"
     tools:context=".ui.loanrequest.LoanRequestFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -66,8 +67,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_normal"
-                android:value="1000"
                 android:stepSize="500"
+                android:value="1000"
                 android:valueFrom="500"
                 app:layout_constraintBottom_toTopOf="@id/first_name_layout"
                 app:layout_constraintEnd_toEndOf="parent"

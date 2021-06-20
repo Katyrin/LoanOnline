@@ -14,8 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.SessionManager
 import com.katyrin.loan_online.databinding.FragmentLoginBinding
-import com.katyrin.loan_online.ui.activities.AuthorizedActivity
-import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
+import com.katyrin.loan_online.ui.activities.MainActivity
 import com.katyrin.loan_online.ui.info.InfoViewPagerFragment
 import com.katyrin.loan_online.utils.afterTextChanged
 import com.katyrin.loan_online.utils.showErrorMessage
@@ -38,7 +37,7 @@ class LoginFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as OnAppCompatActivity).appComponent?.inject(this)
+        (activity as MainActivity).appComponent?.inject(this)
     }
 
     override fun onCreateView(
@@ -197,7 +196,7 @@ class LoginFragment : Fragment() {
     private fun successLoginRenderData(token: String) {
         saveData(token, binding?.username?.text.toString(), binding?.password?.text.toString())
         updateUiWithUser()
-        startActivity(Intent(requireContext(), AuthorizedActivity::class.java))
+        startActivity(Intent(requireContext(), MainActivity::class.java))
         requireActivity().finish()
     }
 
@@ -209,7 +208,7 @@ class LoginFragment : Fragment() {
         requireActivity().supportFragmentManager
             .beginTransaction()
             .replace(
-                R.id.container,
+                R.id.main_container,
                 InfoViewPagerFragment.newInstance(binding?.username?.text.toString())
             )
             .commitNow()

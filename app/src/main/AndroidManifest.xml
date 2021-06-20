@@ -14,9 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoanOnline"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".ui.activities.UnauthorizedActivity"
-            android:label="@string/title_activity_login" />
         <activity android:name=".ui.activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +31,9 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.AuthorizedActivity" />
+        <activity
+            android:name=".ui.activities.MainActivity"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

@@ -14,7 +14,7 @@ import com.katyrin.loan_online.NotificationWorker
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.databinding.FragmentLoansBinding
-import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
+import com.katyrin.loan_online.ui.activities.MainActivity
 import com.katyrin.loan_online.utils.*
 import com.katyrin.loan_online.viewmodel.LoansViewModel
 import com.katyrin.loan_online.viewmodel.appstates.RequestState
@@ -34,7 +34,7 @@ class LoansFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as OnAppCompatActivity).appComponent?.inject(this)
+        (activity as MainActivity).appComponent?.inject(this)
     }
 
     override fun onCreateView(
@@ -92,8 +92,8 @@ class LoansFragment : Fragment() {
     }
 
     private fun addLoanIdFragment(id: Int) {
-        parentFragmentManager.beginTransaction()
-            .add(R.id.container, LoanIdFragment.newInstance(id))
+        requireActivity().supportFragmentManager.beginTransaction()
+            .add(R.id.main_container, LoanIdFragment.newInstance(id))
             .addToBackStack(null)
             .commit()
     }

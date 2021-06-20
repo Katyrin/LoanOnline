@@ -1,7 +1,6 @@
 package com.katyrin.loan_online.ui.success
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.katyrin.loan_online.R
 import com.katyrin.loan_online.data.model.LoanDTO
 import com.katyrin.loan_online.databinding.FragmentSuccessBinding
-import com.katyrin.loan_online.ui.activities.AuthorizedActivity
-import com.katyrin.loan_online.ui.activities.OnAppCompatActivity
-import com.katyrin.loan_online.ui.activities.OnHomeScreen
+import com.katyrin.loan_online.ui.activities.MainActivity
+import com.katyrin.loan_online.ui.main.MainFragment
 import com.katyrin.loan_online.viewmodel.SuccessViewModel
 import javax.inject.Inject
 
@@ -25,13 +23,10 @@ class SuccessFragment : Fragment() {
     private val successViewModel: SuccessViewModel by viewModels(factoryProducer = { factory })
     private var loanDTO: LoanDTO? = null
     private var binding: FragmentSuccessBinding? = null
-    private var listener: OnHomeScreen? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as OnAppCompatActivity).appComponent?.inject(this)
-        if (requireActivity() is AuthorizedActivity)
-            listener = (context as AuthorizedActivity)
+        (activity as MainActivity).appComponent?.inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,17 +58,14 @@ class SuccessFragment : Fragment() {
 
     private fun setButtonClick() {
         binding?.okButton?.setOnClickListener {
-            setButtonAction()
+            replaceMainFragment()
         }
     }
 
-    private fun setButtonAction() {
-        if (requireActivity() is AuthorizedActivity) {
-            listener?.onHomeScreen()
-        } else {
-            startActivity(Intent(requireContext(), AuthorizedActivity::class.java))
-            requireActivity().finish()
-        }
+    private fun replaceMainFragment() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, MainFragment.newInstance())
+            .commitNow()
     }
 
     private fun setInfo() {
@@ -101,8 +93,6 @@ class SuccessFragment : Fragment() {
     override fun onDetach() {
         loanDTO = null
         binding = null
-        if (requireActivity() is AuthorizedActivity)
-            listener = null
         super.onDetach()
     }
 
