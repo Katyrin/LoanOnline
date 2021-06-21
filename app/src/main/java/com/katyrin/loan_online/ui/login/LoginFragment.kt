@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,6 +15,7 @@ import com.katyrin.loan_online.ui.activities.MainActivity
 import com.katyrin.loan_online.ui.info.InfoViewPagerFragment
 import com.katyrin.loan_online.ui.main.MainFragment
 import com.katyrin.loan_online.utils.afterTextChanged
+import com.katyrin.loan_online.utils.hideKeyboard
 import com.katyrin.loan_online.utils.showErrorMessage
 import com.katyrin.loan_online.utils.toast
 import com.katyrin.loan_online.viewmodel.LoginViewModel
@@ -63,10 +63,9 @@ class LoginFragment : Fragment() {
         binding?.password?.apply {
             afterTextChanged { onNextTextInput() }
 
-            setOnEditorActionListener { _, actionId, _ ->
-                when (actionId) {
-                    EditorInfo.IME_ACTION_DONE -> startRegistration()
-                }
+            setOnEditorActionListener { _, _, _ ->
+                requireActivity().hideKeyboard()
+                startRegistration()
                 false
             }
         }

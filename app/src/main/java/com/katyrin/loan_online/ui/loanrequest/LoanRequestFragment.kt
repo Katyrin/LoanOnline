@@ -17,6 +17,7 @@ import com.katyrin.loan_online.ui.activities.BackButtonListener
 import com.katyrin.loan_online.ui.activities.MainActivity
 import com.katyrin.loan_online.ui.success.SuccessFragment
 import com.katyrin.loan_online.utils.afterTextChanged
+import com.katyrin.loan_online.utils.hideKeyboard
 import com.katyrin.loan_online.utils.showErrorMessage
 import com.katyrin.loan_online.utils.toast
 import com.katyrin.loan_online.viewmodel.LoanRequestViewModel
@@ -124,6 +125,7 @@ class LoanRequestFragment : Fragment(), BackButtonListener {
         binding?.phoneNumberEditText?.apply {
             afterTextChanged { onNextTextInput() }
             setOnEditorActionListener { _, _, _ ->
+                requireActivity().hideKeyboard()
                 sendLoanRequest()
                 false
             }
